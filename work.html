@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — Rihan Saifi | Creative Full Stack Developer</title>
+  <meta name="description"
+    content="Explore selected commercial e-commerce storefronts, Shopify Liquid engineering, and interactive web applications crafted by Rihan Saifi." />
+  <meta name="author" content="Rihan Saifi" />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Rihan Saifi Portfolio" />
+  <meta property="og:title" content="Work — Rihan Saifi | Creative Full Stack Developer" />
+  <meta property="og:description"
+    content="Explore selected commercial e-commerce storefronts, Shopify Liquid engineering, and interactive web applications." />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Work — Rihan Saifi | Creative Full Stack Developer" />
+  <meta name="twitter:description"
+    content="Explore selected commercial e-commerce storefronts, Shopify Liquid engineering, and interactive web applications." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='%23b15f2c'%3E%3Cpath d='M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Onest & Libre Caslon Display (matching Framer Angled Gallery) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Onest:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* Reset & Base */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      background: #000000;
+      color: #ffffff;
+    }
+
+    body {
+      background: #000000;
+      color: #ffffff;
+      font-family: 'Onest', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 2px solid #b15f2c;
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* Core Tokens */
+    :root {
+      --accent: #b15f2c;
+      --accent-from: #b15f2c;
+      --accent-to: #d87c3e;
+      --bg: #000000;
+      --surface: #0e0e0e;
+      --surface-glass: rgba(18, 18, 18, 0.75);
+      --border: rgba(255, 255, 255, 0.12);
+      --border-hover: rgba(255, 255, 255, 0.32);
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.65);
+      --text-dim: rgba(255, 255, 255, 0.45);
+      --radius-pill: 9999px;
+      --radius-card: 28px;
+      --font-display: 'Libre Caslon Display', 'Onest', serif;
+    }
+
+    /* Shell */
+    .shell {
+      width: 100%;
+      max-width: 78rem;
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        padding-inline: 2.25rem;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .shell {
+        padding-inline: 3rem;
+      }
+    }
+
+    /* SVG Icon */
+    .svg-icon {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.125em;
+      flex-shrink: 0;
+    }
+
+    /* Pill Buttons */
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-radius: var(--radius-pill);
+      padding: 0.5rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pill-btn.variant-primary {
+      background: var(--accent);
+      color: #ffffff;
+      border: 1px solid var(--accent);
+    }
+
+    .pill-btn.variant-primary:hover {
+      background: #c76f36;
+      box-shadow: 0 0 25px rgba(177, 95, 44, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .pill-btn.variant-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(8px);
+    }
+
+    .pill-btn.variant-outline:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+    }
+
+    /* Site Header */
+    #site-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      pointer-events: auto;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: 1.5rem;
+    }
+
+    .header-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .header-brand:hover {
+      opacity: 0.85;
+    }
+
+    .header-brand svg {
+      font-size: 1.25rem;
+      color: var(--accent);
+    }
+
+    .header-nav {
+      display: none;
+    }
+
+    @media (min-width: 900px) {
+      .header-nav {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .header-nav ul {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .header-nav button,
+    .header-nav a {
+      transition: color 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .header-nav button:hover,
+    .header-nav a:hover {
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .header-nav .active {
+      color: #ffffff;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .header-nav .active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      border-radius: var(--radius-pill);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .clock-chip {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    @media (min-width: 640px) {
+      .clock-chip {
+        display: inline-flex;
+      }
+    }
+
+    .live-time-display {
+      font-variant-numeric: tabular-nums;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 0.8125rem;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    @media (min-width: 900px) {
+      .menu-btn {
+        display: none;
+      }
+    }
+
+    /* Work Page Hero (Minimal, Focused, Scroll-to-Explore) */
+    .work-hero-section {
+      padding-top: clamp(4.5rem, 8vh, 6.25rem);
+      padding-bottom: clamp(1rem, 2vh, 1.75rem);
+      position: relative;
+      text-align: center;
+    }
+
+    .work-hero-ambient {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(44rem, 85vw);
+      height: 18rem;
+      background: radial-gradient(circle, rgba(177, 95, 44, 0.16) 0%, rgba(249, 115, 22, 0.03) 50%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(55px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .work-hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .eyebrow-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-pill);
+      padding: 0.32rem 0.85rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(8px);
+    }
+
+    .eyebrow-dot {
+      width: 0.375rem;
+      height: 0.375rem;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .work-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6.2vw, 4.75rem);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+      color: #ffffff;
+      margin: 0;
+      text-align: center;
+    }
+
+    /* =========================================================================
+       Framer Angled Gallery Architecture with 3D Depth
+       ========================================================================= */
+    .angled-gallery-section {
+      padding-top: clamp(1rem, 2vh, 2rem);
+      padding-bottom: clamp(6rem, 12vh, 10rem);
+      position: relative;
+      perspective: 1600px;
+      transform-style: preserve-3d;
+      overflow: hidden;
+    }
+
+    .angled-gallery-flow {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(5.5rem, 11vh, 9.5rem);
+      width: 100%;
+      transform-style: preserve-3d;
+    }
+
+    /* Individual Angled Card Unit Stage */
+    .angled-card-stage {
+      position: relative;
+      width: 100%;
+      max-width: 78rem;
+      margin-inline: auto;
+      transform-style: preserve-3d;
+      perspective: 1600px;
+      will-change: transform, opacity;
+    }
+
+    /* Card Frame with Architectural -4deg Rotation & Volumetric Shadow */
+    .angled-card-frame {
+      position: relative;
+      width: 100%;
+      min-height: clamp(480px, 66vh, 720px);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: #0d0d0d;
+      transform: rotate(-4deg);
+      transform-origin: center center;
+      transform-style: preserve-3d;
+      box-shadow: 0 35px 90px -15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(2rem, 4vw, 3.75rem);
+      color: #ffffff;
+      text-decoration: none;
+      will-change: transform;
+    }
+
+    @media (max-width: 767px) {
+      .angled-card-frame {
+        transform: rotate(-3deg);
+        padding: 1.75rem 1.25rem;
+        min-height: clamp(420px, 58vh, 560px);
+      }
+    }
+
+    .angled-card-stage:hover .angled-card-frame {
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 45px 110px -15px rgba(0, 0, 0, 0.95), 0 0 70px rgba(177, 95, 44, 0.3);
+      transform: rotate(-4deg) translateY(-8px) scale(1.01);
+    }
+
+    @media (max-width: 767px) {
+      .angled-card-stage:hover .angled-card-frame {
+        transform: rotate(-3deg) translateY(-4px);
+      }
+    }
+
+    /* Oversized Inner Image Container with Counter-Rotation & Parallax */
+    .angled-card-bg-wrap {
+      position: absolute;
+      top: -22%;
+      left: -10%;
+      width: 120%;
+      height: 144%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+      transform: rotate(4deg);
+      transform-origin: center center;
+    }
+
+    @media (max-width: 767px) {
+      .angled-card-bg-wrap {
+        transform: rotate(3deg);
+      }
+    }
+
+    .angled-card-bg-img {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      filter: brightness(0.68) saturate(1.15);
+      will-change: transform, filter;
+      transition: filter 0.6s ease;
+    }
+
+    .angled-card-stage:hover .angled-card-bg-img {
+      filter: brightness(0.78) saturate(1.22);
+    }
+
+    .angled-card-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+          rgba(0, 0, 0, 0.72) 0%,
+          rgba(0, 0, 0, 0.38) 40%,
+          rgba(0, 0, 0, 0.92) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Card Top Meta (Counter-rotated to remain level and readable) */
+    .angled-card-top {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transform: rotate(4deg);
+      transform-origin: left center;
+    }
+
+    @media (max-width: 767px) {
+      .angled-card-top {
+        transform: rotate(3deg);
+      }
+    }
+
+    .angled-card-idx {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .angled-idx-num {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.01em;
+    }
+
+    .angled-idx-cat {
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.78);
+      font-weight: 500;
+    }
+
+    .angled-card-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: var(--radius-pill);
+      padding: 0.45rem 1rem;
+      backdrop-filter: blur(8px);
+      transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+
+    .angled-card-live-pill svg {
+      width: 0.875rem;
+      height: 0.875rem;
+      transition: transform 0.3s ease;
+    }
+
+    .angled-card-stage:hover .angled-card-live-pill {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .angled-card-stage:hover .angled-card-live-pill svg {
+      transform: translate(2px, -2px);
+    }
+
+    /* Card Main Content (Counter-rotated for level, refined typography) */
+    .angled-card-content {
+      position: relative;
+      z-index: 3;
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 58rem;
+      transform: rotate(4deg);
+      transform-origin: left center;
+    }
+
+    @media (max-width: 767px) {
+      .angled-card-content {
+        transform: rotate(3deg);
+      }
+    }
+
+    .angled-card-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 5.2vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+      margin: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .angled-card-stage:hover .angled-card-title {
+      transform: translateX(4px);
+    }
+
+    .angled-card-desc {
+      font-size: clamp(0.9375rem, 1.45vw, 1.125rem);
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 48ch;
+      margin: 0;
+    }
+
+    .angled-card-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding-top: 0.5rem;
+    }
+
+    .angled-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .angled-tag-chip {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-pill);
+      padding: 0.3rem 0.8rem;
+    }
+
+    .angled-card-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #ffffff;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .angled-card-action-btn svg {
+      width: 1.125rem;
+      height: 1.125rem;
+      transition: transform 0.3s ease;
+    }
+
+    .angled-card-stage:hover .angled-card-action-btn {
+      color: var(--accent);
+    }
+
+    .angled-card-stage:hover .angled-card-action-btn svg {
+      transform: translate(3px, -3px);
+    }
+
+    /* Footer */
+    #site-footer {
+      background: #080808;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: clamp(4rem, 8vh, 6rem);
+      padding-bottom: 3rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-cta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 3.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-cta-row {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .footer-cta-h2 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding-block: 3.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .footer-cols {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-cols {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .footer-brand-title svg {
+      font-size: 1.25rem;
+      color: var(--accent);
+    }
+
+    .footer-tagline {
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.5;
+      max-width: 22rem;
+    }
+
+    .footer-col-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .footer-links-list a:hover,
+    .footer-links-list button:hover {
+      color: #ffffff;
+    }
+
+    .footer-legal-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 2rem;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    @media (min-width: 640px) {
+      .footer-legal-bar {
+        flex-direction: row;
+      }
+    }
+
+    /* =========================================================================
+       Cinematic Editorial White Strip Page Navigation Transition
+       ========================================================================= */
+    #strip-transition-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999999;
+      pointer-events: none;
+      overflow: hidden;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    #strip-transition-overlay.is-active,
+    html.strip-nav-pending #strip-transition-overlay {
+      pointer-events: all !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    .strip-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 260vmax;
+      height: 260vmax;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      display: flex;
+      flex-direction: column;
+      pointer-events: none;
+    }
+
+    .strip-bar {
+      flex: 1;
+      width: 100%;
+      background: #ffffff;
+      margin-top: -1.5px;
+      outline: 1px solid #ffffff;
+      box-shadow: -4px 4px 15px rgba(0, 0, 0, 0.08);
+      will-change: transform;
+      transform: translate3d(105%, 0, 0);
+    }
+
+    html.strip-nav-pending .strip-bar {
+      transform: translate3d(0, 0, 0) !important;
+    }/* Mobile Overlay Menu */
+    #nav-menu {
+      position: fixed;
+      inset: 0;
+      background: #000000;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    #nav-menu.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-menu-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-menu-close {
+      font-size: 1rem;
+      color: #ffffff;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-pill);
+    }
+
+    .nav-menu-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .nav-menu-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .nav-menu-btn {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: left;
+      padding-block: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .nav-menu-btn:hover,
+    .nav-menu-btn.active {
+      color: #ffffff;
+    }
+
+    .nav-item-num {
+      font-size: 1rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.35);
+    }
+  </style>
+
+  <!-- Import Maps & Scripts -->
+  <script type="importmap">
+    {
+      "imports": {
+        "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.1.18/+esm"
+      }
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    if (sessionStorage.getItem('strip_nav_active') === '1') {
+      document.documentElement.classList.add('strip-nav-pending');
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- Skip link -->
+  <a href="#work-main" class="sr-only">Skip to content</a>
+
+  <!-- Header -->
+  <header id="site-header">
+    <div class="shell header-inner">
+      <div class="header-brand" data-nav-dest="home">
+        <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor">
+          <path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22Z" />
+        </svg>
+        <span>Rihan Saifi</span>
+      </div>
+
+      <nav class="header-nav" aria-label="Primary navigation">
+        <ul>
+          <li><button type="button" data-nav-dest="home">Home</button></li>
+          <li><button type="button" class="active" aria-current="page" data-nav-dest="work">Work</button></li>
+          <li><button type="button" data-nav-dest="about">About</button></li>
+          <li><button type="button" data-nav-dest="experience">Experience</button></li>
+          <li><button type="button" data-nav-dest="skills">Skills</button></li>
+          <li><a href="mailto:saifirihan683@gmail.com" class="pill-btn variant-primary"
+              style="padding: 0.35rem 0.9rem; font-size: 0.75rem;">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="clock-chip">
+          <span>New Delhi</span>
+          <span class="live-time-display">--:--</span>
+        </div>
+        <button type="button" id="open-menu-btn" class="menu-btn" aria-label="Open navigation menu">
+          <span>Menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="work-main">
+
+    <!-- Work Hero Section (Scroll to Explore) -->
+    <section class="work-hero-section">
+      <div class="work-hero-ambient" aria-hidden="true"></div>
+      <div class="shell work-hero-inner">
+        <h1 class="work-hero-title">Scroll to Explore</h1>
+      </div>
+    </section>
+
+    <!-- Framer Angled Gallery Section with 3D Depth & Continuous Scrub -->
+    <section class="angled-gallery-section" id="angled-gallery">
+      <div class="shell">
+        <div class="angled-gallery-flow">
+
+          <!-- Card 01: Sanki The Crazy Attire -->
+          <div class="angled-card-stage" data-parallax-card>
+            <a href="https://sanki.online/" target="_blank" rel="noopener noreferrer" class="angled-card-frame"
+              aria-label="Explore Sanki The Crazy Attire live website">
+              <div class="angled-card-bg-wrap" aria-hidden="true">
+                <div class="angled-card-bg-img"
+                  style="background-image: url('https://sanki.online/cdn/shop/t/50/assets/sanki-banner-1.jpg?v=88691187224259190531786991143');">
+                </div>
+                <div class="angled-card-bg-overlay"></div>
+              </div>
+
+              <div class="angled-card-top">
+                <div class="angled-card-idx">
+                  <span class="angled-idx-num">01</span>
+                  <span class="angled-idx-cat">Shopify · E-commerce</span>
+                </div>
+                <span class="angled-card-live-pill">
+                  <span>Visit Live Store</span>
+                  <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
+                </span>
+              </div>
+
+              <div class="angled-card-content">
+                <h2 class="angled-card-title">Sanki The Crazy Attire</h2>
+                <p class="angled-card-desc">
+                  Commercial fashion e-commerce storefront engineered for high conversion, brand aesthetic, catalog
+                  discovery, and responsive customer experience.
+                </p>
+                <div class="angled-card-footer">
+                  <div class="angled-card-tags">
+                    <span class="angled-tag-chip">Shopify</span>
+                    <span class="angled-tag-chip">Liquid Theme</span>
+                    <span class="angled-tag-chip">Storefront UX</span>
+                    <span class="angled-tag-chip">Conversion Flow</span>
+                  </div>
+                  <div class="angled-card-action-btn">
+                    <span>View Project</span>
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M7 17 17 7M8 7h9v9" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 02: Swastik Jewels -->
+          <div class="angled-card-stage" data-parallax-card>
+            <a href="https://www.swastikjewel.in/" target="_blank" rel="noopener noreferrer" class="angled-card-frame"
+              aria-label="Explore Swastik Jewels live website">
+              <div class="angled-card-bg-wrap" aria-hidden="true">
+                <div class="angled-card-bg-img"
+                  style="background-image: url('https://www.swastikjewel.in/cdn/shop/files/gallery_1785850344799_z5ssslpuy.jpg');">
+                </div>
+                <div class="angled-card-bg-overlay"></div>
+              </div>
+
+              <div class="angled-card-top">
+                <div class="angled-card-idx">
+                  <span class="angled-idx-num">02</span>
+                  <span class="angled-idx-cat">Shopify · Jewellery</span>
+                </div>
+                <span class="angled-card-live-pill">
+                  <span>Visit Live Store</span>
+                  <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
+                </span>
+              </div>
+
+              <div class="angled-card-content">
+                <h2 class="angled-card-title">Swastik Jewels</h2>
+                <p class="angled-card-desc">
+                  Luxury jewellery digital storefront featuring elegant collection presentations, bespoke product detail
+                  layouts, and streamlined checkout integrations.
+                </p>
+                <div class="angled-card-footer">
+                  <div class="angled-card-tags">
+                    <span class="angled-tag-chip">Jewellery E-commerce</span>
+                    <span class="angled-tag-chip">Custom Theme</span>
+                    <span class="angled-tag-chip">Catalog Filter</span>
+                    <span class="angled-tag-chip">Speed Optimization</span>
+                  </div>
+                  <div class="angled-card-action-btn">
+                    <span>View Project</span>
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M7 17 17 7M8 7h9v9" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 03: Sanki Streetwear Edition -->
+          <div class="angled-card-stage" data-parallax-card>
+            <a href="https://sanki.online/" target="_blank" rel="noopener noreferrer" class="angled-card-frame"
+              aria-label="Explore Sanki Streetwear live website">
+              <div class="angled-card-bg-wrap" aria-hidden="true">
+                <div class="angled-card-bg-img"
+                  style="background-image: url('https://sanki.online/cdn/shop/t/50/assets/sanki-banner-2.jpg?v=24285556755527846331786991143');">
+                </div>
+                <div class="angled-card-bg-overlay"></div>
+              </div>
+
+              <div class="angled-card-top">
+                <div class="angled-card-idx">
+                  <span class="angled-idx-num">03</span>
+                  <span class="angled-idx-cat">E-commerce · Production</span>
+                </div>
+                <span class="angled-card-live-pill">
+                  <span>Visit Live Store</span>
+                  <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
+                </span>
+              </div>
+
+              <div class="angled-card-content">
+                <h2 class="angled-card-title">Sanki Streetwear Edition</h2>
+                <p class="angled-card-desc">
+                  Dynamic apparel storefront engineered with mobile-first performance, rich lookbooks, automated
+                  fulfillment workflows, and continuous maintenance.
+                </p>
+                <div class="angled-card-footer">
+                  <div class="angled-card-tags">
+                    <span class="angled-tag-chip">Responsive Design</span>
+                    <span class="angled-tag-chip">Shopify Apps</span>
+                    <span class="angled-tag-chip">Workflow Automation</span>
+                    <span class="angled-tag-chip">Performance</span>
+                  </div>
+                  <div class="angled-card-action-btn">
+                    <span>View Project</span>
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M7 17 17 7M8 7h9v9" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 04: Swastik Bridal Gallery -->
+          <div class="angled-card-stage" data-parallax-card>
+            <a href="https://www.swastikjewel.in/" target="_blank" rel="noopener noreferrer" class="angled-card-frame"
+              aria-label="Explore Swastik Bridal Gallery live website">
+              <div class="angled-card-bg-wrap" aria-hidden="true">
+                <div class="angled-card-bg-img"
+                  style="background-image: url('https://www.swastikjewel.in/cdn/shop/files/gallery_1788077449769_tpjg2bzyr.jpg');">
+                </div>
+                <div class="angled-card-bg-overlay"></div>
+              </div>
+
+              <div class="angled-card-top">
+                <div class="angled-card-idx">
+                  <span class="angled-idx-num">04</span>
+                  <span class="angled-idx-cat">Luxury Store · Liquid</span>
+                </div>
+                <span class="angled-card-live-pill">
+                  <span>Visit Live Store</span>
+                  <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
+                </span>
+              </div>
+
+              <div class="angled-card-content">
+                <h2 class="angled-card-title">Swastik Bridal Gallery</h2>
+                <p class="angled-card-desc">
+                  High-ticket jewellery collection showcase engineered with refined typography, interactive product
+                  zoom, custom cart drawers, and secure transactions.
+                </p>
+                <div class="angled-card-footer">
+                  <div class="angled-card-tags">
+                    <span class="angled-tag-chip">Luxury UI</span>
+                    <span class="angled-tag-chip">Cart Drawer UX</span>
+                    <span class="angled-tag-chip">Continuous Support</span>
+                    <span class="angled-tag-chip">Code Architecture</span>
+                  </div>
+                  <div class="angled-card-action-btn">
+                    <span>View Project</span>
+                    <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M7 17 17 7M8 7h9v9" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="site-footer">
+    <div class="shell">
+      <div class="footer-cta-row">
+        <h2 class="footer-cta-h2">
+          <span>Have a project in mind?</span><br />
+          <span>Let's build it together.</span>
+        </h2>
+        <a href="mailto:saifirihan683@gmail.com" class="pill-btn variant-primary">
+          <span>Start a project</span>
+          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17 17 7M8 7h9v9" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="footer-cols">
+        <div>
+          <div class="footer-brand-title">
+            <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor">
+              <path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22Z" />
+            </svg>
+            <span>Rihan Saifi</span>
+          </div>
+          <p class="footer-tagline">Full Stack Developer based in New Delhi, India. Building modern web experiences,
+            e-commerce storefronts, and digital solutions.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links-list">
+            <li><button type="button" data-nav-dest="home">Home</button></li>
+            <li><button type="button" data-nav-dest="work"
+                style="color: #ffffff; text-decoration: underline;">Work</button></li>
+            <li><button type="button" data-nav-dest="about">About</button></li>
+            <li><button type="button" data-nav-dest="experience">Experience</button></li>
+            <li><button type="button" data-nav-dest="skills">Skills</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <ul class="footer-links-list">
+            <li><a href="mailto:saifirihan683@gmail.com">saifirihan683@gmail.com</a></li>
+            <li><a href="tel:9891735234">9891735234</a></li>
+            <li><span>New Delhi, India</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Profiles</h4>
+          <ul class="footer-links-list">
+            <li><a href="https://github.com/Rihan-saifi46" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-legal-bar">
+        <span>© 2025 Rihan Saifi. All rights reserved.</span>
+        <button type="button" data-nav-dest="home" style="color: inherit;">Back to Home ↑</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Reusable Cinematic Editorial White Strip Transition Overlay -->
+  <div id="strip-transition-overlay" aria-hidden="true">
+    <div class="strip-wrapper">
+      <div class="strip-bar"></div>
+      <div class="strip-bar"></div>
+      <div class="strip-bar"></div>
+      <div class="strip-bar"></div>
+      <div class="strip-bar"></div>
+      <div class="strip-bar"></div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Mobile Overlay Menu -->
+  <aside id="nav-menu" aria-label="Mobile navigation">
+    <div class="nav-menu-top">
+      <div class="header-brand" data-nav-dest="home">
+        <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor">
+          <path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22Z" />
+        </svg>
+        <span>Rihan Saifi</span>
+      </div>
+      <button type="button" id="close-menu-btn" class="nav-menu-close">Close ✕</button>
+    </div>
+    <div class="nav-menu-body">
+      <ul class="nav-menu-items">
+        <li><button type="button" class="nav-menu-btn" data-nav-dest="home"><span
+              class="nav-item-num">01</span><span>Home</span></button></li>
+        <li><button type="button" class="nav-menu-btn active" data-nav-dest="work"><span
+              class="nav-item-num">02</span><span>Work</span></button></li>
+        <li><button type="button" class="nav-menu-btn" data-nav-dest="about"><span
+              class="nav-item-num">03</span><span>About</span></button></li>
+        <li><button type="button" class="nav-menu-btn" data-nav-dest="experience"><span
+              class="nav-item-num">04</span><span>Experience</span></button></li>
+        <li><button type="button" class="nav-menu-btn" data-nav-dest="skills"><span
+              class="nav-item-num">05</span><span>Skills</span></button></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- JavaScript Module -->
+  <script type="module">
+    import Lenis from 'lenis';
+
+    // 1. Lenis Smooth Momentum Scroll
+    const lenis = new Lenis({
+      smoothWheel: true,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // 2. Clock Update
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12 || 12;
+      const timeStr = String(hours) + ':' + minutes + ' ' + ampm;
+      document.querySelectorAll('.live-time-display').forEach(el => el.textContent = timeStr);
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // 3. GSAP ScrollTrigger 3D Perspective & Depth Scrubbing on Angled Cards
+    if (window.gsap && window.ScrollTrigger) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      document.querySelectorAll('[data-parallax-card]').forEach(cardStage => {
+        const bgImg = cardStage.querySelector('.angled-card-bg-img');
+
+        // Smooth 3D perspective depth change as the card moves through the viewport
+        gsap.fromTo(cardStage,
+          {
+            rotateX: 4,
+            scale: 0.96,
+            z: -40,
+            opacity: 0.9
+          },
+          {
+            rotateX: -3,
+            scale: 0.98,
+            z: -25,
+            opacity: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: cardStage,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true
+            }
+          }
+        );
+
+        // Smooth vertical parallax movement inside the angled container
+        if (bgImg) {
+          gsap.fromTo(bgImg,
+            { yPercent: -18 },
+            {
+              yPercent: 18,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: cardStage,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true
+              }
+            }
+          );
+        }
+      });
+    }
+
+    // 4. Mobile Menu Handling
+    const openMenuBtn = document.getElementById('open-menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (openMenuBtn && navMenu) {
+      openMenuBtn.addEventListener('click', () => {
+        navMenu.classList.add('is-open');
+        lenis.stop();
+      });
+    }
+    if (closeMenuBtn && navMenu) {
+      closeMenuBtn.addEventListener('click', () => {
+        navMenu.classList.remove('is-open');
+        lenis.start();
+      });
+    }
+
+    // 5. Cinematic Editorial White Strip Page Navigation Engine
+    const stripOverlay = document.getElementById('strip-transition-overlay');
+    const stripBars = stripOverlay ? stripOverlay.querySelectorAll('.strip-bar') : [];
+    let isTransitioning = false;
+
+    function resolveDestUrl(dest) {
+      const isFile = window.location.protocol === 'file:';
+      const isSubdir = window.location.pathname.endsWith('/work/') || window.location.pathname.endsWith('/work/index.html');
+      const homePath = isSubdir ? '../index.html' : 'index.html';
+
+      if (dest === 'work') {
+        return null;
+      }
+      if (dest === 'home') {
+        return isFile ? homePath : '/';
+      }
+      return isFile ? (homePath + '#' + dest) : ('/#' + dest);
+    }
+
+    function triggerStripNavigation(dest, label) {
+      if (isTransitioning) return;
+
+      if (navMenu) navMenu.classList.remove('is-open');
+
+      const destUrl = resolveDestUrl(dest);
+      if (!destUrl && dest === 'work') {
+        if (window.lenis) window.lenis.scrollTo(0);
+        else window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced || !window.gsap || !stripOverlay || !stripBars.length) {
+        if (destUrl) window.location.href = destUrl;
+        return;
+      }
+
+      isTransitioning = true;
+      if (typeof lenis !== 'undefined' && lenis && typeof lenis.stop === 'function') {
+        lenis.stop();
+      }
+
+      document.documentElement.classList.remove('strip-nav-pending');
+      stripOverlay.classList.add('is-active');
+      stripOverlay.style.visibility = 'visible';
+      stripOverlay.style.opacity = '1';
+
+      // Stage 1: White strips start at top-right
+      gsap.set(stripBars, { xPercent: 105 });
+
+      // Stage 2: Animate white strips diagonally across viewport toward bottom-left with stagger
+      const tl = gsap.timeline();
+
+      tl.to(stripBars, {
+        xPercent: 0,
+        duration: 0.50,
+        stagger: 0.055,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          // Stage 3: Midpoint - screen completely covered by white strips
+          sessionStorage.setItem('strip_nav_active', '1');
+          if (dest !== 'home' && dest !== 'work') {
+            sessionStorage.setItem('strip_nav_target', dest);
+          }
+          window.location.href = destUrl;
+        }
+      });
+    }
+
+    function playStripReveal() {
+      if (!stripOverlay || !stripBars.length || !window.gsap) {
+        finishStripReveal();
+        return;
+      }
+
+      document.documentElement.classList.remove('strip-nav-pending');
+
+      gsap.to(stripBars, {
+        xPercent: -105,
+        duration: 0.50,
+        stagger: 0.055,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          finishStripReveal();
+        }
+      });
+    }
+
+    function finishStripReveal() {
+      isTransitioning = false;
+      document.documentElement.classList.remove('strip-nav-pending');
+      if (typeof lenis !== 'undefined' && lenis && typeof lenis.start === 'function') {
+        lenis.start();
+      }
+      if (stripOverlay) {
+        stripOverlay.classList.remove('is-active');
+        stripOverlay.style.visibility = 'hidden';
+        stripOverlay.style.opacity = '0';
+        if (window.gsap && stripBars.length) {
+          gsap.set(stripBars, { xPercent: 105 });
+        }
+      }
+    }
+
+    // Stage 4 Reveal: Destination page entrance reveal if arrived from strip transition
+    function handleStripPageEntry() {
+      if (sessionStorage.getItem('strip_nav_active') === '1') {
+        sessionStorage.removeItem('strip_nav_active');
+
+        if (stripOverlay && stripBars.length && window.gsap) {
+          isTransitioning = true;
+          if (typeof lenis !== 'undefined' && lenis && typeof lenis.stop === 'function') {
+            lenis.stop();
+          }
+
+          stripOverlay.classList.add('is-active');
+          stripOverlay.style.visibility = 'visible';
+          stripOverlay.style.opacity = '1';
+
+          // Strips start at resting position (0%), obscuring screen in white
+          gsap.set(stripBars, { xPercent: 0 });
+
+          // Animate beyond viewport toward bottom-left in the SAME direction
+          playStripReveal();
+          return;
+        }
+      }
+
+      finishStripReveal();
+    }
+
+    handleStripPageEntry();
+    window.addEventListener('pageshow', (event) => {
+      isTransitioning = false;
+      if (event.persisted || !sessionStorage.getItem('strip_nav_active')) {
+        finishStripReveal();
+      }
+    });
+
+    // Connect all navigation buttons
+    document.querySelectorAll('[data-nav-dest]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const dest = btn.getAttribute('data-nav-dest');
+        if (dest === 'work') {
+          if (window.lenis) window.lenis.scrollTo(0);
+          else window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+        const label = btn.textContent.trim();
+        triggerStripNavigation(dest, label);
+      });
+    });
+  </script>
+</body>
+
+</html>
