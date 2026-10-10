@@ -4708,6 +4708,8 @@
     }
   }
   </script>
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
   <!-- Main ES Module Script -->
   <script type="module">
@@ -5860,18 +5862,24 @@
     function resolveStripDestUrl(dest) {
       const isFile = window.location.protocol === 'file:';
       const isWorkPage = window.location.pathname.includes('work') || window.location.href.includes('work.html');
+      const isAboutPage = window.location.pathname.includes('about') || window.location.href.includes('about.html');
 
       if (dest === 'work') {
         if (isWorkPage) return null;
         return isFile ? 'work.html' : '/work';
       }
 
+      if (dest === 'about') {
+        if (isAboutPage) return null;
+        return isFile ? 'about.html' : '/about';
+      }
+
       if (dest === 'home') {
-        if (!isWorkPage) return '#home';
+        if (!isWorkPage && !isAboutPage) return '#home';
         return isFile ? 'index.html' : '/';
       }
 
-      if (!isWorkPage) {
+      if (!isWorkPage && !isAboutPage) {
         return '#' + dest;
       } else {
         return isFile ? ('index.html#' + dest) : ('/#' + dest);
@@ -5931,7 +5939,7 @@
           // Stage 3: Midpoint - old page is completely covered by white strips
           if (isCrossPage) {
             sessionStorage.setItem('strip_nav_active', '1');
-            if (dest !== 'home' && dest !== 'work') {
+            if (dest !== 'home' && dest !== 'work' && dest !== 'about') {
               sessionStorage.setItem('strip_nav_target', dest);
             }
             window.location.href = destUrl;
@@ -5995,7 +6003,9 @@
         if (targetNav) {
           sessionStorage.removeItem('strip_nav_target');
           setTimeout(() => {
-            if (window.lenis) {
+            if (targetNav === 'contact') {
+              openRequestModal();
+            } else if (window.lenis) {
               window.lenis.scrollTo('#' + targetNav, { immediate: true });
             } else {
               const el = document.getElementById(targetNav);

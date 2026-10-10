@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Rihan Saifi | Full Stack Developer</title>
+  <meta name="description"
+    content="Learn more about Rihan Saifi, a Full Stack Developer based in New Delhi, India building modern web applications, e-commerce storefronts, and digital solutions." />
+  <meta name="author" content="Rihan Saifi" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Rihan Saifi Portfolio" />
+  <meta property="og:title" content="About — Rihan Saifi | Full Stack Developer" />
+  <meta property="og:description"
+    content="Learn more about Rihan Saifi, a Full Stack Developer based in New Delhi, India building modern web applications, e-commerce storefronts, and digital solutions." />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About — Rihan Saifi | Full Stack Developer" />
+  <meta name="twitter:description"
+    content="Learn more about Rihan Saifi, a Full Stack Developer based in New Delhi, India building modern web applications, e-commerce storefronts, and digital solutions." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' fill='%23b15f2c'%3E%3Cpath d='M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Onest -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset & Base */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      background: #ffffff;
+      color: #111111;
+    }
+
+    body {
+      background: #ffffff;
+      color: #111111;
+      font-family: 'Onest', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    :focus-visible {
+      outline: 2px solid #b15f2c;
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* Core Tokens */
+    :root {
+      --background: #ffffff;
+      --foreground: #111111;
+      --ink: #0a0a0a;
+      --muted: #8d8d8d;
+      --subtle: #b6b6b6;
+      --line: #e6e5e2;
+      --surface: #f1f0ee;
+      --surface-2: #e3e2df;
+      --accent: #b15f2c;
+      --accent-from: #cf8047;
+      --accent-to: #97501f;
+      --radius-pill: 9999px;
+      --radius-card: 1.5rem;
+      --radius-control: 0.875rem;
+    }
+
+    /* Shell */
+    .shell {
+      width: 100%;
+      max-width: 78rem;
+      margin-inline: auto;
+      padding-inline: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .shell {
+        padding-inline: 2.25rem;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .shell {
+        padding-inline: 3rem;
+      }
+    }
+
+    /* SVG Icon base */
+    .svg-icon {
+      width: 1em;
+      height: 1em;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    /* Header */
+    #site-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      transition: background 0.3s ease;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-block: 1.15rem;
+    }
+
+    @media (min-width: 640px) {
+      .header-inner {
+        padding-block: 1.35rem;
+      }
+    }
+
+    .header-brand {
+      cursor: pointer;
+    }
+
+    .header-brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .header-brand:hover .header-brand-wrap {
+        transform: scale(1.04);
+      }
+    }
+
+    .header-brand-wrap svg {
+      font-size: 1.25rem;
+      color: var(--accent);
+    }
+
+    .header-nav {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      .header-nav {
+        display: flex;
+      }
+    }
+
+    .header-nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.85rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .header-nav button,
+    .header-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      opacity: 0.75;
+      color: #111111;
+      position: relative;
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    .header-nav button[aria-current="page"] {
+      opacity: 1;
+      font-weight: 600;
+      color: #111111;
+    }
+
+    .header-nav button[aria-current="page"]::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      border-radius: var(--radius-pill);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+
+      .header-nav button:hover,
+      .header-nav a:hover {
+        transform: translateY(-1.5px);
+        opacity: 1;
+      }
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .clock-chip {
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+      border: 1px solid rgba(230, 229, 226, 0.9);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: var(--radius-control);
+      padding: 0.45rem 0.75rem;
+      font-size: 0.75rem;
+      color: rgba(17, 17, 17, 0.7);
+    }
+
+    @media (min-width: 768px) {
+      .clock-chip {
+        display: flex;
+      }
+    }
+
+    .clock-label {
+      color: rgba(17, 17, 17, 0.45);
+    }
+
+    .clock-time {
+      min-width: 3.5rem;
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+      color: #111111;
+    }
+
+    .clock-sep {
+      color: rgba(17, 17, 17, 0.3);
+    }
+
+    .clock-date {
+      font-weight: 500;
+    }
+
+    .menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0.875rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-pill);
+      background: #ffffff;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    @media (min-width: 1024px) {
+      .menu-btn {
+        display: none;
+      }
+    }
+
+    .menu-btn-inner {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Pill Button Component */
+    .pill-btn {
+      display: inline-flex;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .pill-btn:hover {
+        transform: scale(1.03);
+      }
+    }
+
+    .pill-btn-inner {
+      display: inline-flex;
+      align-items: center;
+      border-radius: var(--radius-pill);
+      font-size: 0.875rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+    }
+
+    .pill-btn.no-arrow .pill-btn-inner {
+      padding: 0.875rem 1.75rem;
+    }
+
+    .pill-btn.has-arrow .pill-btn-inner {
+      padding: 0.375rem 0.375rem 0.375rem 1.5rem;
+      gap: 0.75rem;
+    }
+
+    .pill-btn-badge {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: var(--radius-pill);
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .pill-btn.has-arrow.arrow-right:hover .pill-btn-badge svg {
+        transform: translateX(3px);
+      }
+    }
+
+    .pill-btn.variant-dark .pill-btn-inner {
+      background: var(--ink);
+      color: #ffffff;
+    }
+
+    .pill-btn.variant-dark .pill-btn-badge {
+      background: #ffffff;
+      color: var(--ink);
+    }
+
+    /* Animated Link */
+    .animated-link {
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    .animated-link span {
+      display: inline-block;
+      opacity: 0.65;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease, color 0.35s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .animated-link:hover span {
+        transform: translateY(-2px);
+        opacity: 1;
+        color: #111111;
+      }
+    }
+
+    /* Eyebrow Label */
+    .about-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(17, 17, 17, 0.85);
+      border: 1px solid rgba(17, 17, 17, 0.09);
+      background: rgba(17, 17, 17, 0.03);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-pill);
+    }
+
+    .eyebrow-dot {
+      width: 0.375rem;
+      height: 0.375rem;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* Dedicated About Page Layout */
+    .about-page-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: clamp(3rem, 7vh, 5.5rem);
+      padding-bottom: clamp(4.5rem, 9vh, 7rem);
+    }
+
+    .about-editorial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    @media (min-width: 960px) {
+      .about-editorial-grid {
+        grid-template-columns: minmax(300px, 340px) 1fr;
+        gap: clamp(3.5rem, 5.5vw, 6rem);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .about-editorial-grid {
+        grid-template-columns: 340px 1fr;
+        gap: 6.5rem;
+      }
+    }
+
+    /* Left Column — About Identity & Abstract Geometric Visual */
+    .about-identity-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 959.98px) {
+      .about-identity-column {
+        max-width: 24rem;
+      }
+    }
+
+    /* Minimal Geometric Globe Card */
+    .about-globe-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1.16;
+      max-height: 390px;
+      border-radius: var(--radius-card);
+      background: linear-gradient(155deg, #fcfcfb 0%, #f4f3f0 100%);
+      border: 1px solid rgba(17, 17, 17, 0.08);
+      box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .globe-card-ambient {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 45%, rgba(177, 95, 44, 0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Abstract Geometric Orb SVG Container */
+    .geometric-orb-svg {
+      width: 82%;
+      height: 82%;
+      max-width: 270px;
+      max-height: 270px;
+      display: block;
+      animation: orbFloat 9s ease-in-out infinite;
+      transform-origin: center center;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-5px) rotate(1.5deg);
+      }
+    }
+
+    .orbit-ring-spin {
+      transform-origin: 120px 120px;
+      animation: ringDrift 45s linear infinite;
+    }
+
+    @keyframes ringDrift {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Location Caption */
+    .about-location-caption {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      color: rgba(17, 17, 17, 0.72);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+
+    .location-pin-icon {
+      color: var(--foreground);
+      margin-top: 0.18rem;
+      flex-shrink: 0;
+      font-size: 1.125rem;
+    }
+
+    /* Right Column — Editorial Personal Introduction & Content */
+    .about-content-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    /* Editorial Headline Hierarchy */
+    .about-hero-headline {
+      font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+      font-weight: 400;
+      line-height: 1.28;
+      letter-spacing: -0.025em;
+      margin: 0;
+    }
+
+    .headline-primary {
+      color: #111111;
+      font-weight: 600;
+      display: inline;
+    }
+
+    .headline-continuation {
+      color: #828282;
+      font-weight: 400;
+      display: inline;
+      margin-left: 0.35em;
+    }
+
+    /* Supporting Narrative Paragraphs */
+    .about-paragraphs {
+      margin-top: clamp(1.75rem, 3.5vh, 2.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 45rem;
+    }
+
+    .about-para {
+      font-size: clamp(1rem, 1.15vw, 1.125rem);
+      line-height: 1.72;
+      color: #444444;
+      margin: 0;
+    }
+
+    /* Contact and Online Links Area */
+    .about-contact-block {
+      margin-top: clamp(2.5rem, 5vh, 3.5rem);
+    }
+
+    .about-divider {
+      height: 1px;
+      background: var(--line);
+      border: none;
+      margin-bottom: clamp(1.75rem, 3vh, 2.25rem);
+      width: 100%;
+    }
+
+    .about-contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .about-online-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .online-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #8d8d8d;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .online-links-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      font-size: 0.9375rem;
+    }
+
+    .online-link-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: #111111;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .online-link-item:hover {
+      color: var(--accent);
+    }
+
+    .online-link-item .external-arrow {
+      transition: transform 0.2s ease;
+    }
+
+    .online-link-item:hover .external-arrow {
+      transform: translate(2px, -2px);
+    }
+
+    .online-sep {
+      color: #c9c9c9;
+      font-size: 0.85rem;
+      user-select: none;
+    }
+
+    .about-cta-group {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Footer */
+    .about-site-footer {
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      padding-block: 2.25rem;
+      margin-top: auto;
+      font-size: 0.875rem;
+      color: #888888;
+    }
+
+    .about-footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Reusable Cinematic Editorial White Strip Transition Overlay */
+    #strip-transition-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999999;
+      pointer-events: none;
+      overflow: hidden;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    #strip-transition-overlay.is-active,
+    html.strip-nav-pending #strip-transition-overlay {
+      pointer-events: all !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    .strip-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 260vmax;
+      height: 260vmax;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      display: flex;
+      flex-direction: column;
+      pointer-events: none;
+    }
+
+    .strip-bar {
+      flex: 1;
+      width: 100%;
+      background: #ffffff;
+      margin-top: -1.5px;
+      outline: 1px solid #ffffff;
+      box-shadow: -4px 4px 15px rgba(0, 0, 0, 0.08);
+      will-change: transform;
+      transform: translate3d(105%, 0, 0);
+    }
+
+    html.strip-nav-pending .strip-bar {
+      transform: translate3d(0, 0, 0) !important;
+    }
+
+    /* Mobile Nav Overlay */
+    #nav-menu {
+      position: fixed;
+      inset: 0;
+      background: #0a0a0a;
+      color: #ffffff;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    #nav-menu.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: 1.25rem;
+    }
+
+    .nav-menu-close {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .nav-menu-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding-block: 2rem;
+    }
+
+    .nav-menu-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      width: 100%;
+    }
+
+    .nav-menu-btn {
+      display: flex;
+      align-items: baseline;
+      gap: 1.25rem;
+      font-size: clamp(2rem, 6vw, 3.25rem);
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.6);
+      transition: color 0.25s, transform 0.25s;
+    }
+
+    .nav-menu-btn.active,
+    .nav-menu-btn:hover {
+      color: #ffffff;
+      transform: translateX(8px);
+    }
+
+    .nav-item-num {
+      font-size: 1rem;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .nav-menu-footer {
+      padding-block: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Request Modal */
+    #request-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      padding: 1rem;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    #request-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-panel {
+      position: relative;
+      width: 100%;
+      max-width: 32rem;
+      background: #ffffff;
+      color: #111111;
+      border-radius: var(--radius-card);
+      padding: 2.5rem 2rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      background: var(--surface);
+      display: grid;
+      place-items: center;
+      font-size: 1.125rem;
+      transition: background 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--surface-2);
+    }
+
+    .modal-heading {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-subtitle {
+      font-size: 0.875rem;
+      color: #666666;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal-label {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: #333333;
+    }
+
+    .modal-input,
+    .modal-textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-control);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      background: #ffffff;
+      color: #111111;
+      transition: border-color 0.2s;
+    }
+
+    .modal-input:focus,
+    .modal-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .modal-textarea {
+      resize: vertical;
+      min-height: 5rem;
+    }
+
+    .modal-submit-wrap {
+      margin-top: 1.25rem;
+    }
+
+    .modal-success-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+      padding-block: 1.5rem;
+    }
+
+    .modal-success-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      background: rgba(177, 95, 44, 0.12);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-size: 1.75rem;
+    }
+  </style>
+
+  <script>
+    if (sessionStorage.getItem('strip_nav_active') === '1') {
+      document.documentElement.classList.add('strip-nav-pending');
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- Site Header -->
+  <header id="site-header">
+    <div class="shell header-inner">
+      <div class="header-brand" data-nav-dest="home">
+        <span class="header-brand-wrap">
+          <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
+            <path
+              d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z" />
+          </svg>
+          <span>Rihan Saifi</span>
+        </span>
+      </div>
+
+      <nav class="header-nav" aria-label="Primary navigation">
+        <ul>
+          <li><button type="button" data-nav-dest="home">Home</button></li>
+          <li><button type="button" data-nav-dest="work">Work</button></li>
+          <li><button type="button" aria-current="page" data-nav-dest="about">About</button></li>
+          <li><button type="button" data-nav-dest="experience">Experience</button></li>
+          <li><button type="button" data-nav-dest="skills">Skills</button></li>
+          <li><button type="button" class="open-modal-trigger">Contact</button></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="clock-chip">
+          <span class="clock-label">New Delhi</span>
+          <span class="clock-time live-time-display">--:--</span>
+          <span class="clock-sep">•</span>
+          <span class="clock-date live-date-display">-- ----, ----</span>
+        </div>
+        <button type="button" id="open-menu-btn" class="menu-btn" aria-label="Open navigation menu">
+          <span class="menu-btn-inner">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <span class="menu-text">Menu</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Editorial Content -->
+  <main id="main" class="about-page-main">
+    <div class="shell">
+      <div class="about-editorial-grid">
+
+        <!-- Left Column — About Identity & Abstract Geometric Visual -->
+        <div class="about-identity-column">
+          <!-- Small Label: About Me -->
+          <div class="about-eyebrow">
+            <span class="eyebrow-dot" aria-hidden="true"></span>
+            <span>About Me</span>
+          </div>
+
+          <!-- Elegant Abstract Geometric Globe/Orb Visual in Light Neutral Gray -->
+          <div class="about-globe-card" aria-label="Abstract geometric orb visualization">
+            <div class="globe-card-ambient" aria-hidden="true"></div>
+
+            <svg class="geometric-orb-svg" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+              <defs>
+                <radialGradient id="sphereCoreGrad" cx="38%" cy="36%" r="62%">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+                  <stop offset="55%" stop-color="#f0eee9" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#dcd9d2" stop-opacity="0.95" />
+                </radialGradient>
+                <radialGradient id="ambientGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="60%" stop-color="#eceae5" stop-opacity="0.6" />
+                  <stop offset="100%" stop-color="#eceae5" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+
+              <circle cx="120" cy="120" r="104" fill="url(#ambientGlow)" />
+              <circle cx="120" cy="120" r="98" stroke="#d5d2cc" stroke-width="1" stroke-dasharray="2 6" />
+              <circle cx="120" cy="120" r="90" stroke="#dfdcd6" stroke-width="0.75" />
+
+              <g class="orbit-ring-spin">
+                <ellipse cx="120" cy="120" rx="88" ry="24" transform="rotate(-30 120 120)" stroke="#c2bfb8"
+                  stroke-width="1.2" stroke-dasharray="1 3" />
+                <line x1="72" y1="36" x2="168" y2="204" stroke="#c8c5be" stroke-width="1" stroke-dasharray="4 4" />
+                <circle cx="72" cy="36" r="2.5" fill="#b15f2c" />
+                <circle cx="168" cy="204" r="2.5" fill="#a3a099" />
+              </g>
+
+              <circle cx="120" cy="120" r="74" fill="url(#sphereCoreGrad)" stroke="#c5c2ba" stroke-width="1.2" />
+
+              <line x1="120" y1="46" x2="120" y2="194" stroke="#b0ada5" stroke-width="1" stroke-linecap="round" />
+              <ellipse cx="120" cy="120" rx="28" ry="74" stroke="#b8b5ad" stroke-width="1" stroke-linecap="round" />
+              <ellipse cx="120" cy="120" rx="54" ry="74" stroke="#c4c1b9" stroke-width="0.9" stroke-linecap="round" />
+
+              <line x1="46" y1="120" x2="194" y2="120" stroke="#a9a69e" stroke-width="1.2" stroke-linecap="round" />
+              <path d="M 54 94 Q 120 102 186 94" stroke="#bebbb3" stroke-width="0.9" fill="none" stroke-linecap="round" />
+              <path d="M 72 70 Q 120 76 168 70" stroke="#cfccc4" stroke-width="0.8" fill="none" stroke-linecap="round" />
+              <path d="M 54 146 Q 120 138 186 146" stroke="#bebbb3" stroke-width="0.9" fill="none" stroke-linecap="round" />
+              <path d="M 72 170 Q 120 164 168 170" stroke="#cfccc4" stroke-width="0.8" fill="none" stroke-linecap="round" />
+
+              <circle cx="102" cy="98" r="3.5" fill="#ffffff" fill-opacity="0.8" />
+              <circle cx="120" cy="120" r="2" fill="#b15f2c" />
+            </svg>
+          </div>
+
+          <!-- Location Caption with Crisp Pin Icon -->
+          <div class="about-location-caption">
+            <svg class="svg-icon location-pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 21c-4.2-4.5-7-8.7-7-12.2a7 7 0 1 1 14 0c0 3.5-2.8 7.7-7 12.2z" />
+              <circle cx="12" cy="8.8" r="2.4" />
+            </svg>
+            <span>Based in New Delhi, India — building for the modern web.</span>
+          </div>
+        </div>
+
+        <!-- Right Column — Editorial Personal Introduction -->
+        <div class="about-content-column">
+          <!-- Primary Introduction & Muted Descriptive Continuation -->
+          <h1 class="about-hero-headline">
+            <span class="headline-primary">I'm Rihan Saifi, a Full Stack Developer based in New Delhi, India.</span>
+            <span class="headline-continuation">Building modern web applications, e-commerce storefronts, and digital solutions with clean code and practical engineering.</span>
+          </h1>
+
+          <!-- Concise Supporting Narrative Paragraphs -->
+          <div class="about-paragraphs">
+            <p class="about-para">
+              My work spans React, Next.js, Node.js, Express, MongoDB, Shopify, WordPress, and more. I enjoy turning ideas into functional products, improving existing websites, and building practical solutions that solve real business problems.
+            </p>
+            <p class="about-para">
+              I'm currently pursuing my BCA at Rajdhani College while continuing to work on real-world projects, building web applications, and expanding my development skills.
+            </p>
+          </div>
+
+          <!-- Contact and Online Links Area -->
+          <div class="about-contact-block">
+            <hr class="about-divider" />
+
+            <div class="about-contact-row">
+              <div class="about-online-group">
+                <span class="online-label">Find me online</span>
+                <div class="online-links-wrap">
+                  <a href="https://github.com/Rihan-saifi46" target="_blank" rel="noopener noreferrer"
+                    class="online-link-item">
+                    <span>GitHub</span>
+                    <svg class="svg-icon external-arrow" viewBox="0 0 14 14" fill="none" stroke="currentColor"
+                      stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M3.5 10.5L10.5 3.5M10.5 3.5H5M10.5 3.5V9" />
+                    </svg>
+                  </a>
+                  <span class="online-sep" aria-hidden="true">•</span>
+                  <a href="mailto:saifirihan683@gmail.com" class="online-link-item">
+                    <span>saifirihan683@gmail.com</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="about-cta-group">
+                <button type="button" class="pill-btn variant-dark has-arrow arrow-right" data-nav-dest="contact"
+                  id="about-get-in-touch-btn">
+                  <span class="pill-btn-inner">
+                    <span>Get In Touch</span>
+                    <span class="pill-btn-badge">
+                      <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Editorial Minimal Footer -->
+  <footer class="about-site-footer">
+    <div class="shell about-footer-inner">
+      <div class="footer-left">
+        <span>© <span id="current-year">2026</span> Rihan Saifi. All rights reserved.</span>
+      </div>
+      <div class="footer-right">
+        <button type="button" class="animated-link" data-nav-dest="home">
+          <span>Back to Home ↑</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- NavMenu Modal Overlay (Mobile Menu) -->
+  <div id="nav-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <div class="shell nav-menu-header">
+      <div class="header-brand" data-nav-dest="home">
+        <span class="header-brand-wrap">
+          <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
+            <path
+              d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22Z" />
+          </svg>
+          <span>Rihan Saifi</span>
+        </span>
+      </div>
+      <button type="button" id="close-menu-btn" class="nav-menu-close" aria-label="Close navigation">
+        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4l16 16M20 4 4 20" />
+        </svg>
+        <span>Close</span>
+      </button>
+    </div>
+
+    <div class="shell nav-menu-body">
+      <ul class="nav-menu-items">
+        <li>
+          <button type="button" class="nav-menu-btn" data-nav-dest="home" style="--i:0">
+            <span class="nav-item-num">01</span>
+            <span class="nav-item-label">Home</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="nav-menu-btn" data-nav-dest="work" style="--i:1">
+            <span class="nav-item-num">02</span>
+            <span class="nav-item-label">Work</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="nav-menu-btn active" data-nav-dest="about" style="--i:2">
+            <span class="nav-item-num">03</span>
+            <span class="nav-item-label">About</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="nav-menu-btn" data-nav-dest="experience" style="--i:3">
+            <span class="nav-item-num">04</span>
+            <span class="nav-item-label">Experience</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="nav-menu-btn" data-nav-dest="skills" style="--i:4">
+            <span class="nav-item-num">05</span>
+            <span class="nav-item-label">Skills</span>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="nav-menu-btn" data-nav-target="contact" style="--i:5">
+            <span class="nav-item-num">06</span>
+            <span class="nav-item-label">Contact</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Request Modal Overlay -->
+  <div id="request-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-panel" id="modal-panel-el">
+      <button type="button" id="modal-close-x" class="modal-close-btn" aria-label="Close request dialog">
+        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4l16 16M20 4 4 20" />
+        </svg>
+      </button>
+
+      <div id="modal-form-view">
+        <h2 id="modal-title" class="modal-heading">Let's talk</h2>
+        <p class="modal-subtitle">Tell me about your project, timeline, or idea. I'll get back to you within 24 hours.</p>
+
+        <form id="project-request-form" novalidate>
+          <div class="modal-field">
+            <label class="modal-label" for="req-name">Your Name</label>
+            <input class="modal-input" type="text" id="req-name" name="name" required placeholder="Alex Johnson" />
+          </div>
+
+          <div class="modal-field">
+            <label class="modal-label" for="req-email">Email Address</label>
+            <input class="modal-input" type="email" id="req-email" name="email" required placeholder="alex@company.com" />
+          </div>
+
+          <div class="modal-field">
+            <label class="modal-label" for="req-project">Project Details</label>
+            <textarea class="modal-textarea" id="req-project" name="project" required
+              placeholder="What are you building? Tell me about scope, tech stack, and timeline."></textarea>
+          </div>
+
+          <div class="modal-submit-wrap">
+            <button type="submit" id="modal-submit-btn" class="pill-btn variant-dark has-arrow arrow-right">
+              <span class="pill-btn-inner">
+                <span id="submit-btn-label">Send Message</span>
+                <span class="pill-btn-badge">
+                  <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div id="modal-success-view" class="modal-success-state">
+        <div class="modal-success-icon">✓</div>
+        <h3 class="modal-heading" style="font-size: 1.5rem;">Message Prepared</h3>
+        <p class="modal-subtitle">
+          Your email client has been launched with your project details addressed to <strong>saifirihan683@gmail.com</strong>.
+        </p>
+        <button type="button" id="modal-success-close-btn" class="pill-btn variant-dark no-arrow">
+          <span class="pill-btn-inner"><span>Done</span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reusable Cinematic Editorial White Strip Transition Overlay -->
+  <div id="strip-transition-overlay" aria-hidden="true">
+    <div class="strip-wrapper">
+      <div class="strip-bar"></div>
+      <div class="strip-bar"></div>
+      <div class="strip-bar"></div>
+      <div class="strip-bar"></div>
+      <div class="strip-bar"></div>
+      <div class="strip-bar"></div>
+    </div>
+  </div>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- Lenis CDN & Module Architecture -->
+  <script type="importmap">
+  {
+    "imports": {
+      "lenis": "https://unpkg.com/lenis@1.3.23/dist/lenis.mjs"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import Lenis from 'lenis';
+
+    /* Initialize Lenis smooth scroll */
+    const lenis = new Lenis({ smoothWheel: true });
+    function raf(t) {
+      lenis.raf(t);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    window.lenis = lenis;
+
+    function stopScroll() {
+      if (window.lenis) window.lenis.stop();
+      document.body.style.overflow = 'hidden';
+    }
+
+    function startScroll() {
+      if (window.lenis) window.lenis.start();
+      document.body.style.overflow = '';
+    }
+
+    /* Live Clock update (IST) */
+    function updateClock() {
+      const now = new Date();
+      try {
+        const timeStr = now.toLocaleTimeString('en-US', {
+          timeZone: 'Asia/Kolkata',
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        }).toLowerCase();
+
+        const dateStr = now.toLocaleDateString('en-GB', {
+          timeZone: 'Asia/Kolkata',
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
+
+        document.querySelectorAll('.live-time-display').forEach(el => el.textContent = timeStr);
+        document.querySelectorAll('.live-date-display').forEach(el => el.textContent = dateStr);
+      } catch (e) {
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12 || 12;
+        const timeStr = `${hours}:${minutes}${ampm}`;
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const dateStr = `${now.getDate()} ${months[now.getMonth()]}, ${now.getFullYear()}`;
+        document.querySelectorAll('.live-time-display').forEach(el => el.textContent = timeStr);
+        document.querySelectorAll('.live-date-display').forEach(el => el.textContent = dateStr);
+      }
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    /* Update current year */
+    const yearEl = document.getElementById('current-year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    /* --- NavMenu Modal Overlay --- */
+    const navMenu = document.getElementById('nav-menu');
+    const openMenuBtn = document.getElementById('open-menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+
+    function openNavMenu() {
+      navMenu.classList.add('is-open');
+      stopScroll();
+    }
+    function closeNavMenu() {
+      navMenu.classList.remove('is-open');
+      if (!requestModal.classList.contains('is-open')) {
+        startScroll();
+      }
+    }
+
+    if (openMenuBtn) openMenuBtn.addEventListener('click', openNavMenu);
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeNavMenu);
+
+    document.querySelectorAll('[data-nav-target]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-nav-target');
+        closeNavMenu();
+        if (target === 'contact') {
+          setTimeout(openRequestModal, 250);
+        }
+      });
+    });
+
+    /* --- Request Modal Overlay --- */
+    const requestModal = document.getElementById('request-modal');
+    const modalPanel = document.getElementById('modal-panel-el');
+    const modalCloseX = document.getElementById('modal-close-x');
+    const modalForm = document.getElementById('project-request-form');
+    const modalFormView = document.getElementById('modal-form-view');
+    const modalSuccessView = document.getElementById('modal-success-view');
+    const submitBtn = document.getElementById('modal-submit-btn');
+    const submitBtnLabel = document.getElementById('submit-btn-label');
+    const successCloseBtn = document.getElementById('modal-success-close-btn');
+
+    function openRequestModal() {
+      requestModal.classList.add('is-open');
+      stopScroll();
+    }
+
+    function closeRequestModal() {
+      requestModal.classList.remove('is-open');
+      if (!navMenu.classList.contains('is-open')) {
+        startScroll();
+      }
+      setTimeout(resetModalForm, 300);
+    }
+
+    function resetModalForm() {
+      if (modalFormView) modalFormView.style.display = 'block';
+      if (modalSuccessView) modalSuccessView.style.display = 'none';
+      if (modalForm) modalForm.reset();
+      if (submitBtnLabel) submitBtnLabel.textContent = 'Send Message';
+      if (submitBtn) submitBtn.disabled = false;
+    }
+
+    document.querySelectorAll('.open-modal-trigger').forEach(btn => {
+      btn.addEventListener('click', openRequestModal);
+    });
+
+    if (modalCloseX) modalCloseX.addEventListener('click', closeRequestModal);
+    if (successCloseBtn) successCloseBtn.addEventListener('click', closeRequestModal);
+
+    if (requestModal) {
+      requestModal.addEventListener('click', (e) => {
+        if (e.target === requestModal) closeRequestModal();
+      });
+    }
+    if (modalPanel) {
+      modalPanel.addEventListener('click', (e) => e.stopPropagation());
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (requestModal.classList.contains('is-open')) closeRequestModal();
+        else if (navMenu.classList.contains('is-open')) closeNavMenu();
+      }
+    });
+
+    if (modalForm) {
+      modalForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nameInput = modalForm.querySelector('[name="name"]');
+        const emailInput = modalForm.querySelector('[name="email"]');
+        const messageInput = modalForm.querySelector('[name="project"]');
+
+        const name = nameInput ? nameInput.value.trim() : '';
+        const email = emailInput ? emailInput.value.trim() : '';
+        const message = messageInput ? messageInput.value.trim() : '';
+
+        submitBtnLabel.textContent = 'Preparing email…';
+        submitBtn.disabled = true;
+
+        const subject = encodeURIComponent('Project Inquiry from ' + (name || 'Website Visitor'));
+        const bodyLines = [
+          'Hello Rihan,',
+          '',
+          `Name: ${name}`,
+          `Email: ${email}`,
+          '',
+          'Project details:',
+          message,
+          '',
+          '---',
+          'Sent from portfolio website'
+        ];
+        const body = encodeURIComponent(bodyLines.join('\n'));
+        const mailtoUrl = `mailto:saifirihan683@gmail.com?subject=${subject}&body=${body}`;
+
+        setTimeout(() => {
+          window.location.href = mailtoUrl;
+          if (modalFormView) modalFormView.style.display = 'none';
+          if (modalSuccessView) modalSuccessView.style.display = 'flex';
+        }, 500);
+      });
+    }
+
+    /* =========================================================================
+       Cinematic Editorial White Strip Page Navigation Engine
+       ========================================================================= */
+    const stripOverlay = document.getElementById('strip-transition-overlay');
+    const stripBars = stripOverlay ? stripOverlay.querySelectorAll('.strip-bar') : [];
+    let isStripTransitioning = false;
+
+    function resolveDestUrl(dest) {
+      const isFile = window.location.protocol === 'file:';
+      const isSubdir = window.location.pathname.endsWith('/about/') || window.location.pathname.endsWith('/about/index.html');
+      const homePath = isSubdir ? '../index.html' : 'index.html';
+      const workPath = isSubdir ? '../work.html' : 'work.html';
+
+      if (dest === 'about') {
+        return null;
+      }
+      if (dest === 'work') {
+        return isFile ? workPath : '/work';
+      }
+      if (dest === 'home') {
+        return isFile ? homePath : '/';
+      }
+      return isFile ? (homePath + '#' + dest) : ('/#' + dest);
+    }
+
+    function triggerStripNavigation(dest, label) {
+      if (isStripTransitioning) return;
+
+      if (navMenu) navMenu.classList.remove('is-open');
+
+      const destUrl = resolveDestUrl(dest);
+
+      // If already on About and clicked About, scroll to top
+      if (!destUrl && dest === 'about') {
+        if (window.lenis) window.lenis.scrollTo(0);
+        else window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced || !window.gsap || !stripOverlay || !stripBars.length) {
+        if (destUrl) window.location.href = destUrl;
+        return;
+      }
+
+      isStripTransitioning = true;
+      stopScroll();
+
+      document.documentElement.classList.remove('strip-nav-pending');
+      stripOverlay.classList.add('is-active');
+      stripOverlay.style.visibility = 'visible';
+      stripOverlay.style.opacity = '1';
+
+      // Stage 1: White strips start at top-right
+      gsap.set(stripBars, { xPercent: 105 });
+
+      // Stage 2: Animate white strips diagonally across viewport toward bottom-left with stagger
+      const tl = gsap.timeline();
+
+      tl.to(stripBars, {
+        xPercent: 0,
+        duration: 0.50,
+        stagger: 0.055,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          // Stage 3: Midpoint - screen completely covered by white strips
+          sessionStorage.setItem('strip_nav_active', '1');
+          if (dest !== 'home' && dest !== 'work' && dest !== 'about') {
+            sessionStorage.setItem('strip_nav_target', dest);
+          }
+          window.location.href = destUrl;
+        }
+      });
+    }
+
+    function playStripReveal() {
+      if (!stripOverlay || !stripBars.length || !window.gsap) {
+        finishStripReveal();
+        return;
+      }
+
+      document.documentElement.classList.remove('strip-nav-pending');
+
+      gsap.to(stripBars, {
+        xPercent: -105,
+        duration: 0.50,
+        stagger: 0.055,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          finishStripReveal();
+        }
+      });
+    }
+
+    function finishStripReveal() {
+      isStripTransitioning = false;
+      document.documentElement.classList.remove('strip-nav-pending');
+      startScroll();
+      if (stripOverlay) {
+        stripOverlay.classList.remove('is-active');
+        stripOverlay.style.visibility = 'hidden';
+        stripOverlay.style.opacity = '0';
+        if (window.gsap && stripBars.length) {
+          gsap.set(stripBars, { xPercent: 105 });
+        }
+      }
+    }
+
+    // Stage 4 Reveal: Destination page entrance reveal if arrived from strip transition
+    function handleStripPageEntry() {
+      if (sessionStorage.getItem('strip_nav_active') === '1') {
+        sessionStorage.removeItem('strip_nav_active');
+
+        if (stripOverlay && stripBars.length && window.gsap) {
+          isStripTransitioning = true;
+          stopScroll();
+
+          stripOverlay.classList.add('is-active');
+          stripOverlay.style.visibility = 'visible';
+          stripOverlay.style.opacity = '1';
+
+          // Strips start at resting position (0%), obscuring screen in white
+          gsap.set(stripBars, { xPercent: 0 });
+
+          // Animate beyond viewport toward bottom-left in the SAME direction
+          playStripReveal();
+          return;
+        }
+      }
+
+      finishStripReveal();
+    }
+
+    handleStripPageEntry();
+    window.addEventListener('pageshow', (event) => {
+      isStripTransitioning = false;
+      if (event.persisted || !sessionStorage.getItem('strip_nav_active')) {
+        finishStripReveal();
+      }
+    });
+
+    // Attach click listeners to all navigation buttons
+    document.querySelectorAll('[data-nav-dest]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const dest = btn.getAttribute('data-nav-dest');
+        if (dest === 'about') {
+          if (window.lenis) window.lenis.scrollTo(0);
+          else window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+        const label = btn.textContent.trim();
+        triggerStripNavigation(dest, label);
+      });
+    });
+  </script>
+</body>
+
+</html>

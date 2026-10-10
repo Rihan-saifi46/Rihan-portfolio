@@ -1136,9 +1136,13 @@
       const isFile = window.location.protocol === 'file:';
       const isSubdir = window.location.pathname.endsWith('/work/') || window.location.pathname.endsWith('/work/index.html');
       const homePath = isSubdir ? '../index.html' : 'index.html';
+      const aboutPath = isSubdir ? '../about.html' : 'about.html';
 
       if (dest === 'work') {
         return null;
+      }
+      if (dest === 'about') {
+        return isFile ? aboutPath : '/about';
       }
       if (dest === 'home') {
         return isFile ? homePath : '/';
@@ -1188,7 +1192,7 @@
         onComplete: () => {
           // Stage 3: Midpoint - screen completely covered by white strips
           sessionStorage.setItem('strip_nav_active', '1');
-          if (dest !== 'home' && dest !== 'work') {
+          if (dest !== 'home' && dest !== 'work' && dest !== 'about') {
             sessionStorage.setItem('strip_nav_target', dest);
           }
           window.location.href = destUrl;
