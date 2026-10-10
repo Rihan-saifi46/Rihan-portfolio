@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — Rihan Saifi | Full Stack Developer</title>
   <meta name="description"
-    content="Learn more about Rihan Saifi, a Full Stack Developer based in New Delhi, India building modern web applications, e-commerce storefronts, and digital solutions." />
+    content="I'm Rihan Saifi, a Full Stack Developer based in New Delhi, India. I build modern web applications, e-commerce storefronts, and digital solutions that solve real problems." />
   <meta name="author" content="Rihan Saifi" />
   <meta name="theme-color" content="#ffffff" />
 
@@ -15,14 +15,8 @@
   <meta property="og:site_name" content="Rihan Saifi Portfolio" />
   <meta property="og:title" content="About — Rihan Saifi | Full Stack Developer" />
   <meta property="og:description"
-    content="Learn more about Rihan Saifi, a Full Stack Developer based in New Delhi, India building modern web applications, e-commerce storefronts, and digital solutions." />
+    content="I'm Rihan Saifi, a Full Stack Developer based in New Delhi, India. I build modern web applications, e-commerce storefronts, and digital solutions that solve real problems." />
   <meta property="og:locale" content="en_IN" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="About — Rihan Saifi | Full Stack Developer" />
-  <meta name="twitter:description"
-    content="Learn more about Rihan Saifi, a Full Stack Developer based in New Delhi, India building modern web applications, e-commerce storefronts, and digital solutions." />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml"
@@ -114,16 +108,15 @@
       --background: #ffffff;
       --foreground: #111111;
       --ink: #0a0a0a;
-      --muted: #8d8d8d;
-      --subtle: #b6b6b6;
+      --muted: #6b6b6b;
+      --subtle: #8e8e8e;
       --line: #e6e5e2;
-      --surface: #f1f0ee;
-      --surface-2: #e3e2df;
+      --surface: #f7f6f4;
+      --surface-2: #eae9e5;
       --accent: #b15f2c;
       --accent-from: #cf8047;
       --accent-to: #97501f;
       --radius-pill: 9999px;
-      --radius-card: 1.5rem;
       --radius-control: 0.875rem;
     }
 
@@ -137,17 +130,17 @@
 
     @media (min-width: 768px) {
       .shell {
-        padding-inline: 2.25rem;
+        padding-inline: 2.5rem;
       }
     }
 
     @media (min-width: 1200px) {
       .shell {
-        padding-inline: 3rem;
+        padding-inline: 3.5rem;
       }
     }
 
-    /* SVG Icon base */
+    /* SVG Icon */
     .svg-icon {
       width: 1em;
       height: 1em;
@@ -173,12 +166,12 @@
       align-items: center;
       justify-content: space-between;
       gap: 1.5rem;
-      padding-block: 1.15rem;
+      padding-block: 1.25rem;
     }
 
     @media (min-width: 640px) {
       .header-inner {
-        padding-block: 1.35rem;
+        padding-block: 1.45rem;
       }
     }
 
@@ -220,7 +213,7 @@
     .header-nav ul {
       display: flex;
       align-items: center;
-      gap: 1.85rem;
+      gap: 2rem;
       font-size: 0.875rem;
       font-weight: 500;
     }
@@ -230,7 +223,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.25rem;
-      opacity: 0.75;
+      opacity: 0.72;
       color: #111111;
       position: relative;
       transition: opacity 0.25s, transform 0.25s;
@@ -414,41 +407,43 @@
       }
     }
 
-    /* Eyebrow Label */
-    .about-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: rgba(17, 17, 17, 0.85);
-      border: 1px solid rgba(17, 17, 17, 0.09);
-      background: rgba(17, 17, 17, 0.03);
-      padding: 0.35rem 0.85rem;
-      border-radius: var(--radius-pill);
-    }
-
-    .eyebrow-dot {
-      width: 0.375rem;
-      height: 0.375rem;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
     /* =========================================================================
-       Dedicated About Page Layout (Nina Park Inspired Editorial Structure)
+       NINA PARK EDITORIAL ABOUT PAGE ARCHITECTURE
        ========================================================================= */
     .about-page-main {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-top: clamp(3rem, 7vh, 5.5rem);
-      padding-bottom: clamp(4.5rem, 9vh, 7rem);
+      padding-top: clamp(3.5rem, 7vh, 5.5rem);
+      padding-bottom: clamp(5rem, 10vh, 8rem);
     }
 
+    /* Section A: Large Full-Width Introductory Headline */
+    .about-headline-container {
+      width: 100%;
+      margin-bottom: clamp(3.5rem, 7vh, 5.5rem);
+    }
+
+    .about-large-headline {
+      font-size: clamp(2.35rem, 5vw, 4.25rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      text-align: left;
+      margin: 0;
+    }
+
+    .headline-black {
+      color: #111111;
+      display: inline;
+    }
+
+    .headline-grey {
+      color: var(--subtle);
+      font-weight: 400;
+      display: inline;
+      margin-left: 0.25em;
+    }
+
+    /* Section B: Two-Column Image & Biography Section */
     .about-editorial-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -456,157 +451,94 @@
       align-items: start;
     }
 
-    @media (min-width: 960px) {
+    @media (min-width: 900px) {
       .about-editorial-grid {
-        grid-template-columns: minmax(300px, 340px) 1fr;
-        gap: clamp(3.5rem, 5.5vw, 6rem);
+        grid-template-columns: 340px 1fr;
+        gap: clamp(3.5rem, 5.5vw, 6.5rem);
       }
     }
 
     @media (min-width: 1200px) {
       .about-editorial-grid {
-        grid-template-columns: 340px 1fr;
+        grid-template-columns: 380px 1fr;
         gap: 6.5rem;
       }
     }
 
-    /* Left Column — About Identity & Abstract Geometric Visual */
-    .about-identity-column {
+    /* Left Column: Portrait Profile Image */
+    .about-portrait-column {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
       align-items: flex-start;
+      gap: 1rem;
     }
 
-    @media (max-width: 959.98px) {
-      .about-identity-column {
-        max-width: 24rem;
-      }
-    }
-
-    /* Minimal Geometric Globe Card */
-    .about-globe-card {
-      position: relative;
+    .about-portrait-frame {
       width: 100%;
-      aspect-ratio: 1 / 1.16;
-      max-height: 390px;
-      border-radius: var(--radius-card);
-      background: linear-gradient(155deg, #fcfcfb 0%, #f4f3f0 100%);
-      border: 1px solid rgba(17, 17, 17, 0.08);
-      box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      max-width: 380px;
+      aspect-ratio: 0.75;
+      border-radius: 4px;
       overflow: hidden;
-      user-select: none;
+      background: #f4f3f0;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.08);
+      position: relative;
     }
 
-    .globe-card-ambient {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 45%, rgba(177, 95, 44, 0.04) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    /* Abstract Geometric Orb SVG Container */
-    .geometric-orb-svg {
-      width: 82%;
-      height: 82%;
-      max-width: 270px;
-      max-height: 270px;
+    .about-portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
       display: block;
-      animation: orbFloat 9s ease-in-out infinite;
-      transform-origin: center center;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    @keyframes orbFloat {
-      0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-      }
-      50% {
-        transform: translateY(-5px) rotate(1.5deg);
+    @media (hover: hover) and (pointer: fine) {
+      .about-portrait-frame:hover .about-portrait-img {
+        transform: scale(1.02);
       }
     }
 
-    .orbit-ring-spin {
-      transform-origin: 120px 120px;
-      animation: ringDrift 45s linear infinite;
+    .about-location-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
     }
 
-    @keyframes ringDrift {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* Location Caption */
-    .about-location-caption {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.65rem;
-      color: rgba(17, 17, 17, 0.72);
+    .about-location-tag svg {
+      color: #111111;
       font-size: 0.9375rem;
-      line-height: 1.5;
     }
 
-    .location-pin-icon {
-      color: var(--foreground);
-      margin-top: 0.18rem;
-      flex-shrink: 0;
-      font-size: 1.125rem;
-    }
-
-    /* Right Column — Editorial Personal Introduction & Content */
-    .about-content-column {
+    /* Right Column: Biography & Online Links */
+    .about-biography-column {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
     }
 
-    /* Editorial Headline Hierarchy */
-    .about-hero-headline {
-      font-size: clamp(1.85rem, 3.2vw, 2.75rem);
-      font-weight: 400;
-      line-height: 1.28;
-      letter-spacing: -0.025em;
-      margin: 0;
-    }
-
-    .headline-primary {
-      color: #111111;
-      font-weight: 600;
-      display: inline;
-    }
-
-    .headline-continuation {
-      color: #828282;
-      font-weight: 400;
-      display: inline;
-      margin-left: 0.35em;
-    }
-
-    /* Supporting Narrative Paragraphs */
     .about-paragraphs {
-      margin-top: clamp(1.75rem, 3.5vh, 2.5rem);
       display: flex;
       flex-direction: column;
-      gap: 1.25rem;
-      max-width: 45rem;
+      gap: 1.85rem;
+      max-width: 46rem;
     }
 
-    .about-para {
-      font-size: clamp(1rem, 1.15vw, 1.125rem);
-      line-height: 1.72;
-      color: #444444;
+    .about-paragraph {
+      font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
+      line-height: 1.78;
+      color: var(--muted);
+      font-weight: 400;
       margin: 0;
     }
 
     /* Contact and Online Links Area */
-    .about-contact-block {
-      margin-top: clamp(2.5rem, 5vh, 3.5rem);
+    .about-contact-section {
+      margin-top: clamp(2.5rem, 5vh, 4rem);
     }
 
     .about-divider {
@@ -634,7 +566,7 @@
     .online-label {
       font-size: 0.75rem;
       font-weight: 600;
-      color: #8d8d8d;
+      color: var(--subtle);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -685,7 +617,7 @@
       padding-block: 2.25rem;
       margin-top: auto;
       font-size: 0.875rem;
-      color: #888888;
+      color: var(--subtle);
     }
 
     .about-footer-inner {
@@ -814,11 +746,6 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .nav-menu-footer {
-      padding-block: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
     /* Request Modal */
     #request-modal {
       position: fixed;
@@ -847,7 +774,7 @@
       max-width: 32rem;
       background: #ffffff;
       color: #111111;
-      border-radius: var(--radius-card);
+      border-radius: 1.5rem;
       padding: 2.5rem 2rem;
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
     }
@@ -1001,88 +928,26 @@
   <!-- Main Editorial Content -->
   <main id="main" class="about-page-main">
     <div class="shell">
+
+      <!-- Section A: Large Introductory Headline at Top (Spans Full Page Width) -->
+      <div class="about-headline-container">
+        <h1 class="about-large-headline">
+          <span class="headline-black">I'm Rihan Saifi, a Full Stack Developer based in New Delhi, India.</span>
+          <span class="headline-grey">I build modern web applications, e-commerce storefronts, and digital solutions that solve real problems.</span>
+        </h1>
+      </div>
+
+      <!-- Section B: Image & Biography Section Beneath Headline -->
       <div class="about-editorial-grid">
 
-        <!-- Left Column — About Identity & Abstract Geometric Visual -->
-        <div class="about-identity-column">
-          <!-- Small Label: About Me -->
-          <div class="about-eyebrow">
-            <span class="eyebrow-dot" aria-hidden="true"></span>
-            <span>About Me</span>
+        <!-- LEFT COLUMN: Large Portrait/Profile Image -->
+        <div class="about-portrait-column">
+          <div class="about-portrait-frame">
+            <img src="assets/images/profile.jpg" alt="Rihan Saifi" class="about-portrait-img" loading="eager" />
           </div>
-
-          <!-- Elegant Abstract Geometric Globe/Orb Visual in Light Neutral Gray -->
-          <div class="about-globe-card" aria-label="Abstract geometric orb visualization">
-            <div class="globe-card-ambient" aria-hidden="true"></div>
-
-            <svg class="geometric-orb-svg" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true">
-              <defs>
-                <!-- Subtle Sphere Depth Gradient -->
-                <radialGradient id="sphereCoreGrad" cx="38%" cy="36%" r="62%">
-                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
-                  <stop offset="55%" stop-color="#f0eee9" stop-opacity="0.8" />
-                  <stop offset="100%" stop-color="#dcd9d2" stop-opacity="0.95" />
-                </radialGradient>
-
-                <!-- Soft Drop Shadow on Inner Globe -->
-                <radialGradient id="ambientGlow" cx="50%" cy="50%" r="50%">
-                  <stop offset="60%" stop-color="#eceae5" stop-opacity="0.6" />
-                  <stop offset="100%" stop-color="#eceae5" stop-opacity="0" />
-                </radialGradient>
-              </defs>
-
-              <!-- Outer Ambient Halo -->
-              <circle cx="120" cy="120" r="104" fill="url(#ambientGlow)" />
-
-              <!-- Outer Geometric Celestial Coordinate Ring -->
-              <circle cx="120" cy="120" r="98" stroke="#d5d2cc" stroke-width="1" stroke-dasharray="2 6" />
-              <circle cx="120" cy="120" r="90" stroke="#dfdcd6" stroke-width="0.75" />
-
-              <!-- Tilted Astrolabe / Orbit Rings -->
-              <g class="orbit-ring-spin">
-                <!-- Diagonal Meridian Ring -->
-                <ellipse cx="120" cy="120" rx="88" ry="24" transform="rotate(-30 120 120)" stroke="#c2bfb8"
-                  stroke-width="1.2" stroke-dasharray="1 3" />
-                <!-- Polar Axis Vector Line -->
-                <line x1="72" y1="36" x2="168" y2="204" stroke="#c8c5be" stroke-width="1" stroke-dasharray="4 4" />
-                <!-- Orbital Pivot Marker Dots -->
-                <circle cx="72" cy="36" r="2.5" fill="#b15f2c" />
-                <circle cx="168" cy="204" r="2.5" fill="#a3a099" />
-              </g>
-
-              <!-- Main Solid Sphere Shading Base -->
-              <circle cx="120" cy="120" r="74" fill="url(#sphereCoreGrad)" stroke="#c5c2ba" stroke-width="1.2" />
-
-              <!-- Longitudinal Wireframe Ellipses -->
-              <!-- Prime Meridian (Straight Center Axis) -->
-              <line x1="120" y1="46" x2="120" y2="194" stroke="#b0ada5" stroke-width="1" stroke-linecap="round" />
-
-              <!-- 30-deg East/West Longitudinal Meridians -->
-              <ellipse cx="120" cy="120" rx="28" ry="74" stroke="#b8b5ad" stroke-width="1" stroke-linecap="round" />
-              <!-- 60-deg East/West Longitudinal Meridians -->
-              <ellipse cx="120" cy="120" rx="54" ry="74" stroke="#c4c1b9" stroke-width="0.9" stroke-linecap="round" />
-
-              <!-- Latitudinal Geometric Parallel Curves -->
-              <!-- Equator -->
-              <line x1="46" y1="120" x2="194" y2="120" stroke="#a9a69e" stroke-width="1.2" stroke-linecap="round" />
-              <!-- Northern Tropics -->
-              <path d="M 54 94 Q 120 102 186 94" stroke="#bebbb3" stroke-width="0.9" fill="none" stroke-linecap="round" />
-              <path d="M 72 70 Q 120 76 168 70" stroke="#cfccc4" stroke-width="0.8" fill="none" stroke-linecap="round" />
-              <!-- Southern Tropics -->
-              <path d="M 54 146 Q 120 138 186 146" stroke="#bebbb3" stroke-width="0.9" fill="none" stroke-linecap="round" />
-              <path d="M 72 170 Q 120 164 168 170" stroke="#cfccc4" stroke-width="0.8" fill="none" stroke-linecap="round" />
-
-              <!-- Subtle Geometric Specular Accent -->
-              <circle cx="102" cy="98" r="3.5" fill="#ffffff" fill-opacity="0.8" />
-              <circle cx="120" cy="120" r="2" fill="#b15f2c" />
-            </svg>
-          </div>
-
-          <!-- Location Caption with Crisp Pin Icon -->
-          <div class="about-location-caption">
-            <svg class="svg-icon location-pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <div class="about-location-tag">
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M12 21c-4.2-4.5-7-8.7-7-12.2a7 7 0 1 1 14 0c0 3.5-2.8 7.7-7 12.2z" />
               <circle cx="12" cy="8.8" r="2.4" />
             </svg>
@@ -1090,26 +955,19 @@
           </div>
         </div>
 
-        <!-- Right Column — Editorial Personal Introduction -->
-        <div class="about-content-column">
-          <!-- Primary Introduction & Muted Descriptive Continuation -->
-          <h1 class="about-hero-headline">
-            <span class="headline-primary">I'm Rihan Saifi, a Full Stack Developer based in New Delhi, India.</span>
-            <span class="headline-continuation">Building modern web applications, e-commerce storefronts, and digital solutions with clean code and practical engineering.</span>
-          </h1>
-
-          <!-- Concise Supporting Narrative Paragraphs -->
+        <!-- RIGHT COLUMN: Biography Text & Contact Area -->
+        <div class="about-biography-column">
           <div class="about-paragraphs">
-            <p class="about-para">
+            <p class="about-paragraph">
               My work spans React, Next.js, Node.js, Express, MongoDB, Shopify, WordPress, and more. I enjoy turning ideas into functional products, improving existing websites, and building practical solutions that solve real business problems.
             </p>
-            <p class="about-para">
+            <p class="about-paragraph">
               I'm currently pursuing my BCA at Rajdhani College while continuing to work on real-world projects, building web applications, and expanding my development skills.
             </p>
           </div>
 
           <!-- Contact and Online Links Area -->
-          <div class="about-contact-block">
+          <div class="about-contact-section">
             <hr class="about-divider" />
 
             <div class="about-contact-row">
@@ -1174,7 +1032,7 @@
         <span class="header-brand-wrap">
           <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
             <path
-              d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z" />
+              d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22Z" />
           </svg>
           <span>Rihan Saifi</span>
         </span>
