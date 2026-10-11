@@ -2822,15 +2822,26 @@
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-card) var(--radius-card) 0 0;
-      background: var(--ink);
+      background: #08080c;
       color: #ffffff;
+      min-height: 520px;
+    }
+
+    .footer-box-grid-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      display: block;
     }
 
     .footer-inner {
       position: relative;
       z-index: 10;
-      padding-top: 5rem;
-      padding-bottom: 2.5rem;
+      padding-top: clamp(3.5rem, 6vh, 5.5rem);
+      padding-bottom: clamp(2.5rem, 5vh, 4rem);
     }
 
     @media (min-width: 1024px) {
@@ -2839,12 +2850,44 @@
       }
     }
 
+    /* Glassmorphism Panel behind footer content */
+    .footer-glass-card {
+      position: relative;
+      z-index: 10;
+      background: rgba(14, 15, 20, 0.68);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
+      box-shadow: 
+        0 30px 80px -20px rgba(0, 0, 0, 0.7),
+        0 4px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    @supports not (backdrop-filter: blur(20px)) {
+      .footer-glass-card {
+        background: rgba(12, 13, 17, 0.94);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .footer-glass-card {
+        border-radius: 20px;
+        padding: 2.25rem 1.5rem 1.75rem;
+      }
+    }
+
     .footer-cta-row {
       display: flex;
       flex-direction: column;
       gap: 2rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding-bottom: 3.5rem;
     }
 
     @media (min-width: 1024px) {
@@ -2860,6 +2903,12 @@
       font-size: 2.25rem;
       font-weight: 600;
       letter-spacing: -0.02em;
+      color: #ffffff;
+      line-height: 1.15;
+    }
+
+    .footer-cta-h2 span {
+      color: #ffffff;
     }
 
     @media (min-width: 640px) {
@@ -2874,11 +2923,28 @@
       }
     }
 
+    .footer-cta-row .pill-btn.variant-light .pill-btn-inner {
+      background: #ffffff;
+      color: #0a0a0a;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .footer-cta-row .pill-btn.variant-light:hover .pill-btn-inner {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.35);
+    }
+
+    .footer-cta-row .pill-btn.variant-light .pill-btn-badge {
+      background: #0a0a0a;
+      color: #ffffff;
+    }
+
     .footer-cols {
       display: grid;
       grid-template-columns: 1fr;
       gap: 3rem;
-      padding-block: 4rem;
+      padding-block: 3.5rem;
     }
 
     @media (min-width: 768px) {
@@ -2899,6 +2965,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      color: #ffffff;
     }
 
     .footer-brand-title svg {
@@ -2907,39 +2974,77 @@
     }
 
     .footer-tagline {
-      margin-top: 0.75rem;
+      margin-top: 0.85rem;
       max-width: 22rem;
       font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.55);
-      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.55;
     }
 
     .footer-col-title {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 0.025em;
-      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: #ffffff;
+      opacity: 0.85;
       margin-bottom: 1.25rem;
     }
 
     .footer-links-list {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.85rem;
       font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .footer-links-list a,
+    .footer-links-list button {
+      color: rgba(255, 255, 255, 0.88);
+      text-align: left;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .footer-links-list a:hover,
+    .footer-links-list button:hover {
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
+    }
+
+    .footer-links-list a:focus-visible,
+    .footer-links-list button:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 3px;
+      border-radius: 4px;
     }
 
     .footer-contact-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      color: rgba(255, 255, 255, 0.8);
+      gap: 0.6rem;
+      color: rgba(255, 255, 255, 0.88);
       font-size: 0.875rem;
+    }
+
+    .footer-contact-item svg {
+      color: rgba(255, 255, 255, 0.85);
+      stroke: rgba(255, 255, 255, 0.85);
+      flex-shrink: 0;
+    }
+
+    .footer-contact-item a {
+      color: rgba(255, 255, 255, 0.88);
+      transition: color 0.2s ease;
     }
 
     .footer-contact-item a:hover {
       color: #ffffff;
       text-decoration: underline;
+    }
+
+    .footer-contact-item span {
+      color: rgba(255, 255, 255, 0.88);
     }
 
     .footer-legal-bar {
@@ -2948,10 +3053,10 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
       padding-top: 2rem;
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.45);
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.75);
     }
 
     @media (min-width: 640px) {
@@ -2960,23 +3065,38 @@
       }
     }
 
+    .footer-legal-bar span {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
     .legal-links {
       display: flex;
       gap: 1.5rem;
+    }
+
+    .legal-links button,
+    .legal-links a {
+      color: rgba(255, 255, 255, 0.85);
+      transition: color 0.2s ease;
+    }
+
+    .legal-links button:hover,
+    .legal-links a:hover {
+      color: #ffffff;
     }
 
     .footer-watermark {
       position: absolute;
       inset-inline: 0;
       bottom: -1.5rem;
-      z-index: 0;
+      z-index: 2;
       text-align: center;
       pointer-events: none;
       user-select: none;
       font-weight: 700;
       line-height: 1;
       font-size: clamp(3.5rem, 13vw, var(--text-watermark));
-      color: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.04);
       letter-spacing: -0.03em;
       white-space: nowrap;
     }
@@ -4430,104 +4550,109 @@
 
   <!-- 10) Footer -->
   <footer id="site-footer">
+    <!-- Interactive 3D Box Grid Background Canvas -->
+    <canvas id="footer-box-grid-canvas" class="footer-box-grid-canvas" aria-hidden="true"></canvas>
+
     <div class="shell footer-inner">
-      <!-- CTA Row -->
-      <div class="footer-cta-row">
-        <h2 class="footer-cta-h2">
-          <span class="line-wrap"><span class="line-inner" data-line-reveal data-delay="0">Have a project in
-              mind?</span></span>
-          <span class="line-wrap"><span class="line-inner" data-line-reveal data-delay="100">Let's build
-              it.</span></span>
-        </h2>
-        <button type="button" class="pill-btn variant-light has-arrow arrow-up-right open-modal-trigger">
-          <span class="pill-btn-inner">
-            <span>Start a project</span>
-            <span class="pill-btn-badge">
-              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 17 17 7M8 7h9v9" />
-              </svg>
+      <div class="footer-glass-card">
+        <!-- CTA Row -->
+        <div class="footer-cta-row">
+          <h2 class="footer-cta-h2">
+            <span class="line-wrap"><span class="line-inner" data-line-reveal data-delay="0">Have a project in
+                mind?</span></span>
+            <span class="line-wrap"><span class="line-inner" data-line-reveal data-delay="100">Let's build
+                it.</span></span>
+          </h2>
+          <button type="button" class="pill-btn variant-light has-arrow arrow-up-right open-modal-trigger">
+            <span class="pill-btn-inner">
+              <span>Start a project</span>
+              <span class="pill-btn-badge">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17 17 7M8 7h9v9" />
+                </svg>
+              </span>
             </span>
-          </span>
-        </button>
-      </div>
-
-      <!-- Columns -->
-      <div class="footer-cols">
-        <!-- Col 1: Brand -->
-        <div>
-          <div class="footer-brand-title">
-            <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor">
-              <path
-                d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z" />
-            </svg>
-            <span>Rihan Saifi</span>
-          </div>
-          <p class="footer-tagline">Full Stack Developer based in New Delhi, India. Building modern web experiences,
-            e-commerce storefronts, and digital solutions.</p>
+          </button>
         </div>
 
-        <!-- Col 2: Navigation -->
-        <div>
-          <h4 class="footer-col-title">Navigation</h4>
-          <ul class="footer-links-list">
-            <li><a href="#home" class="animated-link" data-scroll-to="home"><span>Home</span></a></li>
-            <li><button type="button" class="animated-link" data-nav-dest="work"
-                style="text-align:left;"><span>Work</span></button></li>
-            <li><a href="#about" class="animated-link" data-scroll-to="about"><span>About</span></a></li>
-            <li><a href="#experience" class="animated-link" data-scroll-to="experience"><span>Experience</span></a></li>
-            <li><a href="#skills" class="animated-link" data-scroll-to="skills"><span>Skills</span></a></li>
-            <li><button type="button" class="animated-link open-modal-trigger"><span>Contact</span></button></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Direct Contact -->
-        <div>
-          <h4 class="footer-col-title">Contact</h4>
-          <ul class="footer-links-list">
-            <li class="footer-contact-item">
-              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <polyline points="22,6 12,13 2,6" />
-              </svg>
-              <a href="mailto:saifirihan683@gmail.com">saifirihan683@gmail.com</a>
-            </li>
-            <li class="footer-contact-item">
-              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- Columns -->
+        <div class="footer-cols">
+          <!-- Col 1: Brand -->
+          <div>
+            <div class="footer-brand-title">
+              <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor">
                 <path
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z" />
               </svg>
-              <a href="tel:9891735234">9891735234</a>
-            </li>
-            <li class="footer-contact-item" style="color: rgba(255, 255, 255, 0.55);">
-              <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              <span>New Delhi, India</span>
-            </li>
-          </ul>
+              <span>Rihan Saifi</span>
+            </div>
+            <p class="footer-tagline">Full Stack Developer based in New Delhi, India. Building modern web experiences,
+              e-commerce storefronts, and digital solutions.</p>
+          </div>
+
+          <!-- Col 2: Navigation -->
+          <div>
+            <h4 class="footer-col-title">Navigation</h4>
+            <ul class="footer-links-list">
+              <li><a href="#home" class="animated-link" data-scroll-to="home"><span>Home</span></a></li>
+              <li><button type="button" class="animated-link" data-nav-dest="work"
+                  style="text-align:left;"><span>Work</span></button></li>
+              <li><a href="#about" class="animated-link" data-scroll-to="about"><span>About</span></a></li>
+              <li><a href="#experience" class="animated-link" data-scroll-to="experience"><span>Experience</span></a></li>
+              <li><a href="#skills" class="animated-link" data-scroll-to="skills"><span>Skills</span></a></li>
+              <li><button type="button" class="animated-link open-modal-trigger"><span>Contact</span></button></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Direct Contact -->
+          <div>
+            <h4 class="footer-col-title">Contact</h4>
+            <ul class="footer-links-list">
+              <li class="footer-contact-item">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                <a href="mailto:saifirihan683@gmail.com">saifirihan683@gmail.com</a>
+              </li>
+              <li class="footer-contact-item">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <a href="tel:9891735234">9891735234</a>
+              </li>
+              <li class="footer-contact-item">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>New Delhi, India</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Profiles -->
+          <div>
+            <h4 class="footer-col-title">Profiles</h4>
+            <ul class="footer-links-list">
+              <li>
+                <a href="https://github.com/Rihan-saifi46" target="_blank" rel="noopener noreferrer"
+                  class="animated-link">
+                  <span>GitHub ↗</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Col 4: Profiles -->
-        <div>
-          <h4 class="footer-col-title">Profiles</h4>
-          <ul class="footer-links-list">
-            <li>
-              <a href="https://github.com/Rihan-saifi46" target="_blank" rel="noopener noreferrer"
-                class="animated-link">
-                <span>GitHub ↗</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Legal Bar -->
-      <div class="footer-legal-bar">
-        <span>© 2025 Rihan Saifi. All rights reserved.</span>
-        <div class="legal-links">
-          <button type="button" class="animated-link legal-link" data-nav-dest="home"><span>Back to top ↑</span></button>
+        <!-- Legal Bar -->
+        <div class="footer-legal-bar">
+          <span>© 2025 Rihan Saifi. All rights reserved.</span>
+          <div class="legal-links">
+            <button type="button" class="animated-link legal-link" data-nav-dest="home"><span>Back to top ↑</span></button>
+          </div>
         </div>
       </div>
     </div>
@@ -4697,6 +4822,8 @@
   <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Interactive 3D Box Grid Engine -->
+  <script src="assets/js/footer-box-grid.js"></script>
 
   <!-- Main ES Module Script -->
   <script type="module">

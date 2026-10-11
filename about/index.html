@@ -613,13 +613,62 @@
 
     /* Footer (Shared with Work page) */
     #site-footer {
-      background: #080808;
+      background: #08080c;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: clamp(4rem, 8vh, 6rem);
-      padding-bottom: 3rem;
       position: relative;
+      overflow: hidden;
       z-index: 10;
       color: #ffffff;
+      min-height: 520px;
+    }
+
+    .footer-box-grid-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      display: block;
+    }
+
+    .footer-inner {
+      position: relative;
+      z-index: 10;
+      padding-top: clamp(3.5rem, 6vh, 5.5rem);
+      padding-bottom: clamp(2.5rem, 5vh, 4rem);
+    }
+
+    /* Glassmorphism Panel behind footer content */
+    .footer-glass-card {
+      position: relative;
+      z-index: 10;
+      background: rgba(14, 15, 20, 0.68);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
+      box-shadow: 
+        0 30px 80px -20px rgba(0, 0, 0, 0.7),
+        0 4px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    @supports not (backdrop-filter: blur(20px)) {
+      .footer-glass-card {
+        background: rgba(12, 13, 17, 0.94);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .footer-glass-card {
+        border-radius: 20px;
+        padding: 2.25rem 1.5rem 1.75rem;
+      }
     }
 
     .footer-cta-row {
@@ -628,7 +677,7 @@
       gap: 2rem;
       justify-content: space-between;
       align-items: flex-start;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       padding-bottom: 3.5rem;
     }
 
@@ -643,7 +692,11 @@
       font-size: clamp(2rem, 4.5vw, 3.5rem);
       font-weight: 600;
       letter-spacing: -0.02em;
-      line-height: 1.1;
+      line-height: 1.15;
+      color: #ffffff;
+    }
+
+    .footer-cta-h2 span {
       color: #ffffff;
     }
 
@@ -702,40 +755,77 @@
     }
 
     .footer-tagline {
-      margin-top: 0.75rem;
+      margin-top: 0.85rem;
       font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.55);
-      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.55;
       max-width: 22rem;
     }
 
     .footer-col-title {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      opacity: 0.85;
       margin-bottom: 1.25rem;
     }
 
     .footer-links-list {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.85rem;
       font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.75);
+      color: rgba(255, 255, 255, 0.88);
     }
 
     .footer-links-list a,
     .footer-links-list button {
-      color: inherit;
+      color: rgba(255, 255, 255, 0.88);
       text-align: left;
-      transition: color 0.2s;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
     }
 
     .footer-links-list a:hover,
     .footer-links-list button:hover {
       color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.45);
+    }
+
+    .footer-links-list a:focus-visible,
+    .footer-links-list button:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 0.875rem;
+    }
+
+    .footer-contact-item svg {
+      color: rgba(255, 255, 255, 0.85);
+      stroke: rgba(255, 255, 255, 0.85);
+      flex-shrink: 0;
+    }
+
+    .footer-contact-item a {
+      color: rgba(255, 255, 255, 0.88);
+      transition: color 0.2s ease;
+    }
+
+    .footer-contact-item a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .footer-contact-item span {
+      color: rgba(255, 255, 255, 0.88);
     }
 
     .footer-legal-bar {
@@ -744,16 +834,31 @@
       gap: 1rem;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
       padding-top: 2rem;
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.45);
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.75);
     }
 
     @media (min-width: 640px) {
       .footer-legal-bar {
         flex-direction: row;
       }
+    }
+
+    .footer-legal-bar span {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .footer-legal-bar button,
+    .footer-legal-bar a {
+      color: rgba(255, 255, 255, 0.85);
+      transition: color 0.2s ease;
+    }
+
+    .footer-legal-bar button:hover,
+    .footer-legal-bar a:hover {
+      color: #ffffff;
     }
 
     /* Reusable Cinematic Editorial White Strip Transition Overlay */
@@ -1139,63 +1244,86 @@
 
   <!-- Footer (Shared component with Work page) -->
   <footer id="site-footer">
-    <div class="shell">
-      <div class="footer-cta-row">
-        <h2 class="footer-cta-h2">
-          <span>Have a project in mind?</span><br />
-          <span>Let's build it together.</span>
-        </h2>
-        <a href="mailto:saifirihan683@gmail.com" class="pill-btn variant-primary">
-          <span>Start a project</span>
-          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M7 17 17 7M8 7h9v9" />
-          </svg>
-        </a>
-      </div>
+    <!-- Interactive 3D Box Grid Background Canvas -->
+    <canvas id="footer-box-grid-canvas" class="footer-box-grid-canvas" aria-hidden="true"></canvas>
 
-      <div class="footer-cols">
-        <div>
-          <div class="footer-brand-title">
-            <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor">
-              <path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22Z" />
+    <div class="shell footer-inner">
+      <div class="footer-glass-card">
+        <div class="footer-cta-row">
+          <h2 class="footer-cta-h2">
+            <span>Have a project in mind?</span><br />
+            <span>Let's build it together.</span>
+          </h2>
+          <a href="mailto:saifirihan683@gmail.com" class="pill-btn variant-primary">
+            <span>Start a project</span>
+            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 17 17 7M8 7h9v9" />
             </svg>
-            <span>Rihan Saifi</span>
+          </a>
+        </div>
+
+        <div class="footer-cols">
+          <div>
+            <div class="footer-brand-title">
+              <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor">
+                <path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22Z" />
+              </svg>
+              <span>Rihan Saifi</span>
+            </div>
+            <p class="footer-tagline">Full Stack Developer based in New Delhi, India. Building modern web experiences,
+              e-commerce storefronts, and digital solutions.</p>
           </div>
-          <p class="footer-tagline">Full Stack Developer based in New Delhi, India. Building modern web experiences,
-            e-commerce storefronts, and digital solutions.</p>
+
+          <div>
+            <h4 class="footer-col-title">Navigation</h4>
+            <ul class="footer-links-list">
+              <li><button type="button" data-nav-dest="home">Home</button></li>
+              <li><button type="button" data-nav-dest="work">Work</button></li>
+              <li><button type="button" data-nav-dest="about"
+                  style="color: #ffffff; text-decoration: underline;">About</button></li>
+              <li><button type="button" class="open-modal-trigger">Contact</button></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="footer-col-title">Contact</h4>
+            <ul class="footer-links-list">
+              <li class="footer-contact-item">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                <a href="mailto:saifirihan683@gmail.com">saifirihan683@gmail.com</a>
+              </li>
+              <li class="footer-contact-item">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <a href="tel:9891735234">9891735234</a>
+              </li>
+              <li class="footer-contact-item">
+                <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>New Delhi, India</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="footer-col-title">Profiles</h4>
+            <ul class="footer-links-list">
+              <li><a href="https://github.com/Rihan-saifi46" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <h4 class="footer-col-title">Navigation</h4>
-          <ul class="footer-links-list">
-            <li><button type="button" data-nav-dest="home">Home</button></li>
-            <li><button type="button" data-nav-dest="work">Work</button></li>
-            <li><button type="button" data-nav-dest="about"
-                style="color: #ffffff; text-decoration: underline;">About</button></li>
-            <li><button type="button" class="open-modal-trigger">Contact</button></li>
-          </ul>
+        <div class="footer-legal-bar">
+          <span>© 2026 Rihan Saifi. All rights reserved.</span>
+          <button type="button" data-nav-dest="home" style="color: inherit;">Back to Home ↑</button>
         </div>
-
-        <div>
-          <h4 class="footer-col-title">Contact</h4>
-          <ul class="footer-links-list">
-            <li><a href="mailto:saifirihan683@gmail.com">saifirihan683@gmail.com</a></li>
-            <li><a href="tel:9891735234">9891735234</a></li>
-            <li><span>New Delhi, India</span></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="footer-col-title">Profiles</h4>
-          <ul class="footer-links-list">
-            <li><a href="https://github.com/Rihan-saifi46" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-legal-bar">
-        <span>© 2026 Rihan Saifi. All rights reserved.</span>
-        <button type="button" data-nav-dest="home" style="color: inherit;">Back to Home ↑</button>
       </div>
     </div>
   </footer>
@@ -1326,6 +1454,8 @@
   <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Interactive 3D Box Grid Engine -->
+  <script src="../assets/js/footer-box-grid.js"></script>
 
   <!-- Lenis CDN & Module Architecture -->
   <script type="importmap">
