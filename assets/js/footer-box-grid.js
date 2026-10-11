@@ -1,27 +1,28 @@
 /**
- * Lumora Portfolio — Interactive 3D Box Grid Engine
+ * Lumora Portfolio — Interactive 3D Diamond Box Grid Engine
  * Powered by Three.js InstancedMesh
  * Inspired by Framer Marketplace "Interactive Box Grid"
  * 
  * Features:
- * - Visible, dense grid of individual 3D boxes with physical depth, top faces, and edge wireframes
- * - Oblique perspective camera displaying 3D top and front extrusion faces at rest
- * - Damped harmonic spring physics (wave ripple + Gaussian cursor lift + kinetic impulses)
- * - Dynamic cursor point light casting warm amber/gold reflections on nearby boxes
- * - Idle ambient breathing wave keeping the grid living on desktop & mobile
- * - Lightweight & highly performant: 1 draw call for all solid boxes + 1 for edge highlights
- * - IntersectionObserver auto-pause, ResizeObserver, reduced-motion compliance
- * - Non-blocking pointer events preserving all footer links and text selection
+ * - Tightly packed, rounded diamond squircle 3D tiles with visible thickness and beveled edges
+ * - Gentle oblique perspective view angle matching the reference
+ * - Subtle monochrome vector glyphs (✦ sparkle, ✳ asterisk, ✴ burst, ✺ spiral) on selected tiles
+ * - Reference color palette: near-black charcoal tiles with soft white/pale pink center,
+ *   radiant magenta/pink midtones, and muted mauve/violet peripheral iridescence
+ * - Damped harmonic spring physics (wave ripple + Gaussian proximity lift + neighbor slope tilts)
+ * - Dynamic cursor point light casting soft pink/white illumination
+ * - Automatic pause via IntersectionObserver when footer is offscreen
+ * - Non-blocking pointer events preserving all footer links and text
  */
 
 (function () {
   'use strict';
 
   // Physics constants
-  const SPRING_K = 135.0;
-  const SPRING_DAMP = 13.5;
+  const SPRING_K = 140.0;
+  const SPRING_DAMP = 14.0;
   const MAX_RIPPLES = 8;
-  const CAMERA_TILT_DEG = 36; // Oblique downward camera pitch
+  const CAMERA_TILT_DEG = 26; // Gentle oblique downward angle matching reference
 
   class InteractiveBoxGrid {
     constructor(footerEl, options = {}) {
@@ -37,14 +38,20 @@
       }
 
       this.options = Object.assign({
-        boxWidth: 44,
-        boxHeight: 44,
-        boxDepth: 16,
-        boxGap: 9,
-        peakLift: 34,
-        waveRadius: 170,
-        waveSpeed: 330,
-        ambientAmplitude: 3.5,
+        tileSizeDesktop: 52,
+        tileSizeMobile: 38,
+        tileRadiusDesktop: 12,
+        tileRadiusMobile: 9,
+        tileDepth: 11,
+        bevelSize: 2.4,
+        bevelThickness: 2.4,
+        gapDesktop: 7.5,
+        gapMobile: 6.0,
+        peakLift: 26,
+        waveRadiusDesktop: 240,
+        waveRadiusMobile: 170,
+        waveSpeed: 340,
+        ambientAmplitude: 2.8,
         ambientSpeed: 0.95
       }, options);
 
@@ -74,6 +81,8 @@
 
       this.ripples = [];
       this.tiles = [];
+      this.iconMeshes = [];
+      this.iconInstances = [[], [], [], []];
 
       this.init();
     }
@@ -85,6 +94,7 @@
       }
 
       this.setupThree();
+      this.setupIcons();
       this.setupEvents();
       this.handleResize();
       this.setupObserver();
@@ -95,8 +105,8 @@
       // Scene
       this.scene = new THREE.Scene();
 
-      // Camera: Perspective with oblique pitch
-      this.camera = new THREE.PerspectiveCamera(40, 1, 1, 5000);
+      // Perspective Camera (gentle oblique pitch)
+      this.camera = new THREE.PerspectiveCamera(36, 1, 1, 5000);
 
       // WebGL Renderer
       this.renderer = new THREE.WebGLRenderer({
@@ -108,24 +118,24 @@
       this.renderer.setPixelRatio(this.dpr);
       this.renderer.setClearColor(0x000000, 0);
 
-      // Lighting Setup
-      // 1) Ambient Light: Ensures resting boxes have rich metallic slate presence
-      this.ambientLight = new THREE.AmbientLight(0x525c72, 2.5);
+      // Lighting Setup matching reference:
+      // 1) Ambient Light: Ensures resting tiles have rich, dark charcoal presence
+      this.ambientLight = new THREE.AmbientLight(0x353a48, 2.2);
       this.scene.add(this.ambientLight);
 
-      // 2) Directional Key Light: Angled from top-front-right for dimensional shading
-      this.dirLight = new THREE.DirectionalLight(0xffffff, 2.8);
-      this.dirLight.position.set(200, -400, 600);
+      // 2) Directional Key Light: Angled from upper-front for subtle bevel highlights
+      this.dirLight = new THREE.DirectionalLight(0xffffff, 2.4);
+      this.dirLight.position.set(160, -320, 520);
       this.scene.add(this.dirLight);
 
-      // 3) Cursor Dynamic Point Light: Warm Amber / Gold that tracks the pointer
-      this.cursorPointLight = new THREE.PointLight(0xf59e0b, 0, 480);
-      this.cursorPointLight.position.set(0, 0, 60);
+      // 3) Cursor Dynamic Point Light: Soft pink-white that tracks pointer
+      this.cursorPointLight = new THREE.PointLight(0xf472b6, 0, 460);
+      this.cursorPointLight.position.set(0, 0, 75);
       this.scene.add(this.cursorPointLight);
 
-      // 4) Cool Titanium Rim Light: Subtle opposing accent
-      this.rimLight = new THREE.PointLight(0x93c5fd, 1.2, 700);
-      this.rimLight.position.set(-350, 250, 200);
+      // 4) Subtle Peripheral Rim Light (soft mauve)
+      this.rimLight = new THREE.PointLight(0xa855f7, 0.7, 650);
+      this.rimLight.position.set(-300, 250, 150);
       this.scene.add(this.rimLight);
 
       // Raycaster & Ground Plane (Z = 0)
@@ -134,17 +144,97 @@
       this.mouseNdc = new THREE.Vector2(-9999, -9999);
       this.raycastPos = new THREE.Vector3();
 
-      // Dummy for matrix calculations
+      // Matrix computation dummy
       this.dummy = new THREE.Object3D();
 
-      // Palette Colors
-      this.colorBaseBox = new THREE.Color(0x222836); // Sleek metallic obsidian slate
-      this.colorBaseEdge = new THREE.Color(0x606f88); // Crisp luminous metallic edge line
-      this.colorAmber = new THREE.Color(0xd97706);    // Lumora brand warm amber
-      this.colorGold = new THREE.Color(0xfbbf24);     // Wave crest radiant gold
-      this.colorWhiteGleam = new THREE.Color(0xfffbeb);// Specular rim gleam
+      // Exact Reference Color Palette:
+      this.colorBase = new THREE.Color(0x0f1116);      // Deep near-black obsidian charcoal
+      this.colorWhite = new THREE.Color(0xffffff);     // Luminous white core
+      this.colorPalePink = new THREE.Color(0xfde2e8);  // Soft pale pink peak
+      this.colorPink = new THREE.Color(0xf472b6);      // Radiant bright pink
+      this.colorMagenta = new THREE.Color(0xdb2777);   // Midtone vibrant magenta
+      this.colorCyan = new THREE.Color(0x38bdf8);      // Subtle sky/cyan iridescent accent
+      this.colorMauve = new THREE.Color(0x701a75);     // Peripheral muted mauve / deep violet
+
+      this.colorIconBase = new THREE.Color(0x525666); // Faint muted silver at rest
+      this.colorIconLit = new THREE.Color(0xffffff);  // Crisp white when illuminated
+
       this.tempColor = new THREE.Color();
-      this.tempEdgeColor = new THREE.Color();
+      this.tempIconColor = new THREE.Color();
+    }
+
+    setupIcons() {
+      // Create 4 procedural vector symbol textures (64x64 canvas)
+      const createTexture = (drawFn) => {
+        const c = document.createElement('canvas');
+        c.width = 64; c.height = 64;
+        const ctx = c.getContext('2d');
+        ctx.clearRect(0, 0, 64, 64);
+        ctx.fillStyle = '#ffffff';
+        ctx.strokeStyle = '#ffffff';
+        drawFn(ctx);
+        const tex = new THREE.CanvasTexture(c);
+        tex.needsUpdate = true;
+        return tex;
+      };
+
+      // 0: ✦ 4-point concave sparkle star
+      const texSparkle = createTexture((ctx) => {
+        ctx.beginPath();
+        ctx.moveTo(32, 10);
+        ctx.quadraticCurveTo(32, 28, 54, 32);
+        ctx.quadraticCurveTo(32, 36, 32, 54);
+        ctx.quadraticCurveTo(32, 36, 10, 32);
+        ctx.quadraticCurveTo(32, 28, 32, 10);
+        ctx.fill();
+      });
+
+      // 1: ✳ 8-ray asterisk
+      const texAsterisk = createTexture((ctx) => {
+        ctx.lineWidth = 4;
+        ctx.lineCap = 'round';
+        for (let a = 0; a < 8; a++) {
+          const ang = (a * Math.PI) / 4;
+          ctx.beginPath();
+          ctx.moveTo(32 + Math.cos(ang) * 5, 32 + Math.sin(ang) * 5);
+          ctx.lineTo(32 + Math.cos(ang) * 19, 32 + Math.sin(ang) * 19);
+          ctx.stroke();
+        }
+      });
+
+      // 2: ✴ 12-ray radial starburst
+      const texBurst = createTexture((ctx) => {
+        ctx.lineWidth = 2.4;
+        ctx.lineCap = 'round';
+        for (let a = 0; a < 12; a++) {
+          const ang = (a * Math.PI) / 6;
+          ctx.beginPath();
+          ctx.moveTo(32 + Math.cos(ang) * 5, 32 + Math.sin(ang) * 5);
+          ctx.lineTo(32 + Math.cos(ang) * 18, 32 + Math.sin(ang) * 18);
+          ctx.stroke();
+        }
+      });
+
+      // 3: ✺ Interlocking petal spiral
+      const texSpiral = createTexture((ctx) => {
+        ctx.lineWidth = 2.6;
+        for (let i = 0; i < 6; i++) {
+          const ang = (i * Math.PI) / 3;
+          ctx.beginPath();
+          ctx.arc(32 + Math.cos(ang) * 7, 32 + Math.sin(ang) * 7, 7, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      });
+
+      this.iconTextures = [texSparkle, texAsterisk, texBurst, texSpiral];
+      this.iconMaterials = this.iconTextures.map(tex => new THREE.MeshBasicMaterial({
+        map: tex,
+        transparent: true,
+        opacity: 0.45,
+        depthWrite: false
+      }));
+
+      this.iconGeo = new THREE.PlaneGeometry(16, 16);
     }
 
     setupEvents() {
@@ -167,8 +257,8 @@
             const dy = this.mouse.targetWorldY - this.mouse.prevWorldY;
             this.mouse.speed = Math.sqrt(dx * dx + dy * dy);
 
-            if (this.mouse.speed > 22) {
-              this.emitRipple(this.mouse.targetWorldX, this.mouse.targetWorldY, Math.min(this.mouse.speed * 0.45, 32));
+            if (this.mouse.speed > 24) {
+              this.emitRipple(this.mouse.targetWorldX, this.mouse.targetWorldY, Math.min(this.mouse.speed * 0.45, 30));
             }
           }
           this.mouse.prevWorldX = this.mouse.targetWorldX;
@@ -190,7 +280,7 @@
           this.mouse.targetWorldX = this.raycastPos.x;
           this.mouse.targetWorldY = this.raycastPos.y;
           this.mouse.targetIntensity = 1.0;
-          this.emitRipple(this.mouse.worldX, this.mouse.worldY, 24);
+          this.emitRipple(this.mouse.worldX, this.mouse.worldY, 22);
         }
       };
 
@@ -219,7 +309,7 @@
             this.mouse.targetWorldX = this.raycastPos.x;
             this.mouse.targetWorldY = this.raycastPos.y;
             this.mouse.targetIntensity = 1.0;
-            this.emitRipple(this.mouse.worldX, this.mouse.worldY, 26);
+            this.emitRipple(this.mouse.worldX, this.mouse.worldY, 24);
           }
         }
       }, { passive: true });
@@ -245,14 +335,14 @@
         }, 1200);
       }, { passive: true });
 
-      // Prefers-reduced-motion listener
+      // Reduced motion listener
       const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
       mql.addEventListener('change', (e) => {
         this.isReducedMotion = e.matches;
       });
     }
 
-    emitRipple(x, y, strength = 22) {
+    emitRipple(x, y, strength = 20) {
       if (this.isReducedMotion) return;
       if (this.ripples.length >= MAX_RIPPLES) {
         this.ripples.shift();
@@ -260,14 +350,14 @@
       this.ripples.push({
         x: x,
         y: y,
-        strength: Math.min(strength, 36),
+        strength: Math.min(strength, 30),
         time: performance.now(),
         speed: this.options.waveSpeed
       });
     }
 
     setupObserver() {
-      // Pause animation loop when footer is offscreen (saves 100% GPU/CPU)
+      // Pause animation loop when offscreen
       const io = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           this.isVisible = entry.isIntersecting;
@@ -298,8 +388,8 @@
       this.dpr = Math.min(window.devicePixelRatio || 1, 2);
       this.renderer.setSize(this.width, this.height, false);
 
-      // Camera distance calculation: 1 world unit corresponds to ~1 pixel at scene center
-      const fovRad = (40 * Math.PI) / 180;
+      // Camera distance calculation: gentle oblique perspective
+      const fovRad = (36 * Math.PI) / 180;
       const tiltRad = (CAMERA_TILT_DEG * Math.PI) / 180;
       const camDist = (this.height * 0.5) / Math.tan(fovRad * 0.5);
 
@@ -313,104 +403,161 @@
 
     rebuildGrid() {
       const isMobile = this.width < 768;
-      const boxW = isMobile ? 34 : this.options.boxWidth;
-      const boxH = isMobile ? 34 : this.options.boxHeight;
-      const boxD = isMobile ? 12 : this.options.boxDepth;
-      const gap = isMobile ? 7 : this.options.boxGap;
-      const pitch = boxW + gap;
+      const tileSize = isMobile ? this.options.tileSizeMobile : this.options.tileSizeDesktop;
+      const tileRadius = isMobile ? this.options.tileRadiusMobile : this.options.tileRadiusDesktop;
+      const tileDepth = this.options.tileDepth;
+      const bevelSize = this.options.bevelSize;
+      const bevelThickness = this.options.bevelThickness;
+      const gap = isMobile ? this.options.gapMobile : this.options.gapDesktop;
 
-      this.currentBoxW = boxW;
-      this.currentBoxH = boxH;
-      this.currentBoxD = boxD;
+      this.currentTileSize = tileSize;
+      this.currentDepth = tileDepth;
+      this.currentBevel = bevelSize;
+
+      // Clean up previous meshes
+      if (this.tileMesh) {
+        this.scene.remove(this.tileMesh);
+        this.tileMesh.geometry.dispose();
+        this.tileMesh = null;
+      }
+      this.iconMeshes.forEach(im => {
+        this.scene.remove(im);
+        im.geometry.dispose();
+      });
+      this.iconMeshes = [];
+      this.iconInstances = [[], [], [], []];
+
+      // Procedural rounded squircle shape
+      const shape = new THREE.Shape();
+      const half = tileSize * 0.5;
+      const r = tileRadius;
+      shape.moveTo(-half + r, -half);
+      shape.lineTo(half - r, -half);
+      shape.quadraticCurveTo(half, -half, half, -half + r);
+      shape.lineTo(half, half - r);
+      shape.quadraticCurveTo(half, half, half - r, half);
+      shape.lineTo(-half + r, half);
+      shape.quadraticCurveTo(-half, half, -half, half - r);
+      shape.lineTo(-half, -half + r);
+      shape.quadraticCurveTo(-half, -half, -half + r, -half);
+
+      const tileGeo = new THREE.ExtrudeGeometry(shape, {
+        depth: tileDepth,
+        bevelEnabled: true,
+        bevelSegments: 3,
+        steps: 1,
+        bevelSize: bevelSize,
+        bevelThickness: bevelThickness
+      });
+      tileGeo.center();
+
+      const tileMat = new THREE.MeshStandardMaterial({
+        roughness: 0.35,
+        metalness: 0.45
+      });
+
+      // Diamond Grid Mathematics:
+      // Each tile is rotated 45 deg around Z.
+      // Pitch between parallel tile edges is physicalSize + gap.
+      const physicalSize = tileSize + bevelSize * 2;
+      const pitch = physicalSize + gap;
+      const invSqrt2 = Math.SQRT1_2; // 0.7071
+
       this.currentPitch = pitch;
 
-      // Calculate visible span with generous overscan to fill the perspective frustum
-      const spanX = this.width * 1.35;
-      const spanY = this.height * 1.45;
+      // Calculate span with generous margin to fill the perspective viewport
+      const spanX = this.width * 1.5;
+      const spanY = this.height * 1.55;
+      const countU = Math.ceil(spanX / (pitch * invSqrt2)) + 4;
+      const countV = Math.ceil(spanY / (pitch * invSqrt2)) + 4;
 
-      this.cols = Math.ceil(spanX / pitch) + 2;
-      this.rows = Math.ceil(spanY / pitch) + 2;
-
-      const totalCount = this.cols * this.rows;
-
-      // Dispose previous meshes
-      if (this.boxMesh) {
-        this.scene.remove(this.boxMesh);
-        this.boxMesh.geometry.dispose();
-        this.boxMesh = null;
-      }
-      if (this.edgeMesh) {
-        this.scene.remove(this.edgeMesh);
-        this.edgeMesh.geometry.dispose();
-        this.edgeMesh = null;
-      }
-
-      // Geometries
-      const boxGeo = new THREE.BoxGeometry(boxW, boxH, boxD);
-      const edgeGeo = new THREE.EdgesGeometry(boxGeo);
-
-      // Materials
-      const boxMat = new THREE.MeshStandardMaterial({
-        roughness: 0.32,
-        metalness: 0.55
-      });
-
-      const edgeMat = new THREE.LineBasicMaterial({
-        transparent: true,
-        opacity: 0.72
-      });
-
-      this.boxMesh = new THREE.InstancedMesh(boxGeo, boxMat, totalCount);
-      this.edgeMesh = new THREE.InstancedMesh(edgeGeo, edgeMat, totalCount);
-      this.edgeMesh.isMesh = false;
-      this.edgeMesh.isLine = true;
-      this.edgeMesh.isLineSegments = true;
-
-      this.scene.add(this.boxMesh);
-      this.scene.add(this.edgeMesh);
-
-      const startX = -((this.cols - 1) * pitch) * 0.5;
-      const startY = -((this.rows - 1) * pitch) * 0.5;
+      const minU = -Math.floor(countU / 2);
+      const maxU = Math.floor(countU / 2);
+      const minV = -Math.floor(countV / 2);
+      const maxV = Math.floor(countV / 2);
 
       this.tiles = [];
-      const dummy = this.dummy;
 
-      for (let r = 0; r < this.rows; r++) {
-        for (let c = 0; c < this.cols; c++) {
-          const idx = r * this.cols + c;
-          const x = startX + c * pitch;
-          const y = startY + r * pitch;
+      for (let u = minU; u <= maxU; u++) {
+        for (let v = minV; v <= maxV; v++) {
+          const x = (u - v) * pitch * invSqrt2;
+          const y = (u + v) * pitch * invSqrt2;
 
-          this.tiles.push({
-            c, r,
-            baseX: x,
-            baseY: y,
-            baseZ: boxD * 0.5,
-            z: 0,
-            vz: 0,
-            targetZ: 0,
-            tiltX: 0,
-            tiltY: 0,
-            light: 0
-          });
+          if (Math.abs(x) < spanX * 0.58 && Math.abs(y) < spanY * 0.62) {
+            // Deterministic icon assignment for ~30% of tiles
+            const hash = Math.abs((u * 73856093 ^ v * 19349663) % 100);
+            let iconType = -1;
+            if (hash < 8) iconType = 0;       // ✦ sparkle
+            else if (hash < 16) iconType = 1; // ✳ asterisk
+            else if (hash < 24) iconType = 2; // ✴ burst
+            else if (hash < 32) iconType = 3; // ✺ spiral
 
-          dummy.position.set(x, y, boxD * 0.5);
-          dummy.rotation.set(0, 0, 0);
-          dummy.scale.set(1, 1, 1);
-          dummy.updateMatrix();
-
-          this.boxMesh.setMatrixAt(idx, dummy.matrix);
-          this.edgeMesh.setMatrixAt(idx, dummy.matrix);
-
-          this.boxMesh.setColorAt(idx, this.colorBaseBox);
-          this.edgeMesh.setColorAt(idx, this.colorBaseEdge);
+            this.tiles.push({
+              u, v,
+              baseX: x,
+              baseY: y,
+              baseZ: 0,
+              z: 0,
+              vz: 0,
+              targetZ: 0,
+              tiltX: 0,
+              tiltY: 0,
+              light: 0,
+              iconType: iconType
+            });
+          }
         }
       }
 
-      this.boxMesh.instanceMatrix.needsUpdate = true;
-      this.edgeMesh.instanceMatrix.needsUpdate = true;
-      if (this.boxMesh.instanceColor) this.boxMesh.instanceColor.needsUpdate = true;
-      if (this.edgeMesh.instanceColor) this.edgeMesh.instanceColor.needsUpdate = true;
+      const totalCount = this.tiles.length;
+      this.tileMesh = new THREE.InstancedMesh(tileGeo, tileMat, totalCount);
+      this.scene.add(this.tileMesh);
+
+      // Group icon instances
+      this.tiles.forEach((t, idx) => {
+        if (t.iconType >= 0) {
+          this.iconInstances[t.iconType].push({ tileIdx: idx, tile: t });
+        }
+      });
+
+      for (let k = 0; k < 4; k++) {
+        const im = new THREE.InstancedMesh(this.iconGeo, this.iconMaterials[k], this.iconInstances[k].length);
+        this.scene.add(im);
+        this.iconMeshes.push(im);
+      }
+
+      // Initial transform setup
+      const dummy = this.dummy;
+      for (let i = 0; i < totalCount; i++) {
+        const t = this.tiles[i];
+        dummy.position.set(t.baseX, t.baseY, t.baseZ);
+        dummy.rotation.set(0, 0, Math.PI * 0.25);
+        dummy.scale.set(1, 1, 1);
+        dummy.updateMatrix();
+
+        this.tileMesh.setMatrixAt(i, dummy.matrix);
+        this.tileMesh.setColorAt(i, this.colorBase);
+      }
+
+      this.tileMesh.instanceMatrix.needsUpdate = true;
+      if (this.tileMesh.instanceColor) this.tileMesh.instanceColor.needsUpdate = true;
+
+      const topOffset = (tileDepth + bevelThickness * 2) * 0.5 + 0.35;
+      for (let k = 0; k < 4; k++) {
+        const list = this.iconInstances[k];
+        const im = this.iconMeshes[k];
+        for (let j = 0; j < list.length; j++) {
+          const t = list[j].tile;
+          dummy.position.set(t.baseX, t.baseY, t.baseZ + topOffset);
+          dummy.rotation.set(0, 0, Math.PI * 0.25);
+          dummy.scale.set(1, 1, 1);
+          dummy.updateMatrix();
+          im.setMatrixAt(j, dummy.matrix);
+          im.setColorAt(j, this.colorIconBase);
+        }
+        im.instanceMatrix.needsUpdate = true;
+        if (im.instanceColor) im.instanceColor.needsUpdate = true;
+      }
     }
 
     start() {
@@ -432,7 +579,7 @@
     }
 
     update(dt, time) {
-      if (!this.boxMesh || !this.tiles.length) return;
+      if (!this.tileMesh || !this.tiles.length) return;
 
       // Lerp mouse world position and intensity
       const lerpSpeed = 10.0 * dt;
@@ -440,24 +587,25 @@
       this.mouse.worldY += (this.mouse.targetWorldY - this.mouse.worldY) * lerpSpeed;
       this.mouse.intensity += (this.mouse.targetIntensity - this.mouse.intensity) * (8.0 * dt);
 
-      // Update Cursor Dynamic Point Light
+      // Update Cursor Dynamic Point Light (soft pink radiance)
       if (this.cursorPointLight) {
-        this.cursorPointLight.position.set(this.mouse.worldX, this.mouse.worldY, 55);
-        this.cursorPointLight.intensity = this.mouse.intensity * 3.6;
+        this.cursorPointLight.position.set(this.mouse.worldX, this.mouse.worldY, 70);
+        this.cursorPointLight.intensity = this.mouse.intensity * 3.4;
       }
 
-      // Filter expired ripples
+      // Filter expired shockwave ripples
       const nowMs = performance.now();
       this.ripples = this.ripples.filter(rip => {
         const age = (nowMs - rip.time) / 1000;
-        return age < 2.2;
+        return age < 2.0;
       });
 
       const mx = this.mouse.worldX;
       const my = this.mouse.worldY;
       const mInt = this.mouse.intensity;
       const hasMouse = mInt > 0.005;
-      const radius = this.options.waveRadius;
+      const isMobile = this.width < 768;
+      const radius = isMobile ? this.options.waveRadiusMobile : this.options.waveRadiusDesktop;
       const radiusSq = radius * radius;
       const peakLift = this.options.peakLift;
       const ambAmp = this.isReducedMotion ? 0 : this.options.ambientAmplitude;
@@ -470,8 +618,8 @@
         // 1) Idle ambient harmonic wave
         let targetZ = 0;
         if (!this.isReducedMotion) {
-          const w1 = Math.sin(t.baseX * 0.0035 + t.baseY * 0.0025 + time * ambSpeed) * ambAmp;
-          const w2 = Math.cos(t.baseX * 0.0022 - t.baseY * 0.003 + time * (ambSpeed * 0.8)) * (ambAmp * 0.6);
+          const w1 = Math.sin(t.baseX * 0.004 + t.baseY * 0.003 + time * ambSpeed) * ambAmp;
+          const w2 = Math.cos(t.baseX * 0.0025 - t.baseY * 0.0035 + time * (ambSpeed * 0.8)) * (ambAmp * 0.55);
           targetZ = w1 + w2;
         }
 
@@ -482,10 +630,12 @@
           const dy = t.baseY - my;
           const distSq = dx * dx + dy * dy;
 
-          if (distSq < radiusSq * 2.8) {
-            const bell = Math.exp(-distSq / (2 * radiusSq));
-            targetZ += bell * peakLift * mInt;
-            lightVal = Math.max(0, 1.0 - Math.sqrt(distSq) / (radius * 1.5)) * mInt;
+          if (distSq < radiusSq) {
+            const dist = Math.sqrt(distSq);
+            const norm = 1.0 - (dist / radius);
+            const bell = Math.cos((dist / radius) * Math.PI * 0.5);
+            targetZ += Math.pow(bell, 1.8) * peakLift * mInt;
+            lightVal = Math.pow(norm, 1.3) * mInt;
           }
         }
 
@@ -499,15 +649,15 @@
           const dy = t.baseY - rip.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           const diff = Math.abs(dist - curRadius);
-          const ringWidth = 75.0;
+          const ringWidth = 80.0;
 
           if (diff < ringWidth * 1.5) {
-            const decay = Math.exp(-age * 1.8);
+            const decay = Math.exp(-age * 2.0);
             const ringShape = Math.cos((diff / ringWidth) * Math.PI * 0.5);
             if (ringShape > 0) {
               const pulse = ringShape * rip.strength * decay;
               targetZ += pulse;
-              lightVal = Math.max(lightVal, (pulse / 35.0) * 0.85);
+              lightVal = Math.max(lightVal, (pulse / 30.0) * 0.9);
             }
           }
         }
@@ -526,64 +676,84 @@
       }
 
       // Calculate spatial tilts and update Three.js matrices & colors
-      const pitch = this.currentPitch;
       const dummy = this.dummy;
-      const boxMesh = this.boxMesh;
-      const edgeMesh = this.edgeMesh;
+      const tileMesh = this.tileMesh;
+      const topOffset = (this.currentDepth + this.currentBevel * 2) * 0.5 + 0.35;
 
-      for (let r = 0; r < this.rows; r++) {
-        for (let c = 0; c < this.cols; c++) {
-          const idx = r * this.cols + c;
-          const t = this.tiles[idx];
+      for (let i = 0; i < totalCount; i++) {
+        const t = this.tiles[i];
 
-          const upIdx = Math.max(0, r - 1) * this.cols + c;
-          const downIdx = Math.min(this.rows - 1, r + 1) * this.cols + c;
-          const leftIdx = r * this.cols + Math.max(0, c - 1);
-          const rightIdx = r * this.cols + Math.min(this.cols - 1, c + 1);
+        // Gentle dynamic tilt based on proximity
+        if (hasMouse && t.light > 0.05) {
+          const dx = t.baseX - mx;
+          const dy = t.baseY - my;
+          const d = Math.sqrt(dx * dx + dy * dy) + 0.001;
+          t.tiltX = (-dy / d) * (t.light * 0.16);
+          t.tiltY = (dx / d) * (t.light * 0.16);
+        } else {
+          t.tiltX *= 0.85;
+          t.tiltY *= 0.85;
+        }
 
-          const dzY = (this.tiles[downIdx].z - this.tiles[upIdx].z) / (pitch * 2);
-          const dzX = (this.tiles[rightIdx].z - this.tiles[leftIdx].z) / (pitch * 2);
+        dummy.position.set(t.baseX, t.baseY, t.baseZ + t.z);
+        dummy.rotation.set(t.tiltX, t.tiltY, Math.PI * 0.25);
+        dummy.scale.set(1, 1, 1);
+        dummy.updateMatrix();
 
-          t.tiltX = Math.max(-0.28, Math.min(0.28, -dzY * 0.35));
-          t.tiltY = Math.max(-0.28, Math.min(0.28, dzX * 0.35));
+        tileMesh.setMatrixAt(i, dummy.matrix);
 
-          // Set 3D transform
-          dummy.position.set(t.baseX, t.baseY, t.baseZ + t.z);
-          dummy.rotation.set(t.tiltX, t.tiltY, 0);
-          dummy.scale.set(1, 1, 1);
-          dummy.updateMatrix();
-
-          boxMesh.setMatrixAt(idx, dummy.matrix);
-          edgeMesh.setMatrixAt(idx, dummy.matrix);
-
-          // Dynamic Color Shading:
-          // Base obsidian slate -> warm amber -> golden crest
-          const liftNorm = Math.max(0, Math.min(1.0, t.z / 28.0));
-          const highlight = Math.max(0, Math.min(1.0, t.light * 1.2 + liftNorm * 0.5));
-
-          if (highlight > 0.02) {
-            // Blend from base slate to warm amber, then to luminous gold
-            if (highlight < 0.6) {
-              this.tempColor.copy(this.colorBaseBox).lerp(this.colorAmber, highlight / 0.6);
-              this.tempEdgeColor.copy(this.colorBaseEdge).lerp(this.colorAmber, highlight / 0.6);
-            } else {
-              this.tempColor.copy(this.colorAmber).lerp(this.colorGold, (highlight - 0.6) / 0.4);
-              this.tempEdgeColor.copy(this.colorAmber).lerp(this.colorWhiteGleam, (highlight - 0.6) / 0.4);
+        // Exact Reference Palette Shading:
+        // Peak: Radiant White & Pale Pink -> Mid: Vibrant Magenta & Pink with subtle cyan glint -> Fringe: Mauve/Violet -> Base: Charcoal Obsidian
+        const lv = t.light;
+        if (lv > 0.01) {
+          if (lv > 0.72) {
+            // Peak center: radiant white to soft pale pink
+            const f = (lv - 0.72) / 0.28;
+            this.tempColor.copy(this.colorPalePink).lerp(this.colorWhite, f);
+          } else if (lv > 0.38) {
+            // Mid glow: vibrant pink/magenta with subtle cyan/violet iridescent blend
+            const f = (lv - 0.38) / 0.34;
+            this.tempColor.copy(this.colorMagenta).lerp(this.colorPink, f);
+            if (f < 0.4) {
+              this.tempColor.lerp(this.colorCyan, (0.4 - f) * 0.35);
             }
           } else {
-            this.tempColor.copy(this.colorBaseBox);
-            this.tempEdgeColor.copy(this.colorBaseEdge);
+            // Outer fringe: deep mauve/violet transitioning to dark obsidian
+            const f = lv / 0.38;
+            this.tempColor.copy(this.colorBase).lerp(this.colorMauve, Math.pow(f, 1.2));
           }
-
-          boxMesh.setColorAt(idx, this.tempColor);
-          edgeMesh.setColorAt(idx, this.tempEdgeColor);
+        } else {
+          this.tempColor.copy(this.colorBase);
         }
+
+        tileMesh.setColorAt(i, this.tempColor);
       }
 
-      boxMesh.instanceMatrix.needsUpdate = true;
-      edgeMesh.instanceMatrix.needsUpdate = true;
-      if (boxMesh.instanceColor) boxMesh.instanceColor.needsUpdate = true;
-      if (edgeMesh.instanceColor) edgeMesh.instanceColor.needsUpdate = true;
+      tileMesh.instanceMatrix.needsUpdate = true;
+      if (tileMesh.instanceColor) tileMesh.instanceColor.needsUpdate = true;
+
+      // Update Icon Meshes
+      for (let k = 0; k < 4; k++) {
+        const list = this.iconInstances[k];
+        const im = this.iconMeshes[k];
+        for (let j = 0; j < list.length; j++) {
+          const t = list[j].tile;
+          dummy.position.set(t.baseX, t.baseY, t.baseZ + t.z + topOffset);
+          dummy.rotation.set(t.tiltX, t.tiltY, Math.PI * 0.25);
+          dummy.scale.set(1, 1, 1);
+          dummy.updateMatrix();
+          im.setMatrixAt(j, dummy.matrix);
+
+          if (t.light > 0.05) {
+            this.tempIconColor.copy(this.colorIconBase).lerp(this.colorIconLit, Math.min(1.0, t.light * 1.5));
+          } else {
+            this.tempIconColor.copy(this.colorIconBase);
+          }
+          im.setColorAt(j, this.tempIconColor);
+        }
+        im.instanceMatrix.needsUpdate = true;
+        if (im.instanceColor) im.instanceColor.needsUpdate = true;
+      }
     }
 
     render() {
@@ -594,14 +764,14 @@
 
     destroy() {
       if (this.rafId) cancelAnimationFrame(this.rafId);
-      if (this.boxMesh) {
-        this.scene.remove(this.boxMesh);
-        this.boxMesh.geometry.dispose();
+      if (this.tileMesh) {
+        this.scene.remove(this.tileMesh);
+        this.tileMesh.geometry.dispose();
       }
-      if (this.edgeMesh) {
-        this.scene.remove(this.edgeMesh);
-        this.edgeMesh.geometry.dispose();
-      }
+      this.iconMeshes.forEach(im => {
+        this.scene.remove(im);
+        im.geometry.dispose();
+      });
       if (this.renderer) {
         this.renderer.dispose();
       }

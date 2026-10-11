@@ -2851,33 +2851,36 @@
     }
 
     /* Glassmorphism Panel behind footer content */
+    /* Glassmorphism Panel behind footer content */
     .footer-glass-card {
       position: relative;
       z-index: 10;
-      background: rgba(10, 12, 18, 0.22);
-      -webkit-backdrop-filter: blur(4px) saturate(125%);
-      backdrop-filter: blur(4px) saturate(125%);
+      max-width: 62rem;
+      margin-inline: auto;
+      background: rgba(12, 14, 20, 0.45);
+      -webkit-backdrop-filter: blur(8px) saturate(135%);
+      backdrop-filter: blur(8px) saturate(135%);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 28px;
-      padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
+      padding: clamp(2rem, 4vw, 3.25rem) clamp(1.75rem, 3.5vw, 2.75rem);
       box-shadow: 
-        0 20px 50px -15px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.02);
+        0 25px 60px -15px rgba(0, 0, 0, 0.65),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.03);
       overflow: hidden;
       transition: border-color 0.4s ease, box-shadow 0.4s ease;
     }
 
-    @supports not (backdrop-filter: blur(4px)) {
+    @supports not (backdrop-filter: blur(8px)) {
       .footer-glass-card {
-        background: rgba(10, 12, 18, 0.7);
+        background: rgba(12, 14, 20, 0.85);
       }
     }
 
     @media (max-width: 768px) {
       .footer-glass-card {
         border-radius: 20px;
-        padding: 2.25rem 1.5rem 1.75rem;
+        padding: 2rem 1.5rem 1.75rem;
       }
     }
 
@@ -2887,7 +2890,7 @@
     .footer-links a,
     .footer-copyright,
     .footer-back-to-top {
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
     .footer-cta-row {
@@ -2908,7 +2911,7 @@
 
     .footer-cta-h2 {
       max-width: 16ch;
-      font-size: 2.25rem;
+      font-size: clamp(2.125rem, 3.5vw, 2.625rem);
       font-weight: 600;
       letter-spacing: -0.02em;
       color: #ffffff;
@@ -2922,18 +2925,6 @@
     .footer-cta-h2 .line-inner {
       transform: translateY(0) !important;
       opacity: 1 !important;
-    }
-
-    @media (min-width: 640px) {
-      .footer-cta-h2 {
-        font-size: 3rem;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .footer-cta-h2 {
-        font-size: 3.75rem;
-      }
     }
 
     .footer-cta-row .pill-btn.variant-light .pill-btn-inner {
@@ -2973,12 +2964,13 @@
     }
 
     .footer-brand-title {
-      font-size: 1.125rem;
+      font-size: 1.0625rem;
       font-weight: 600;
       display: flex;
       align-items: center;
       gap: 0.5rem;
       color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
     .footer-brand-title svg {
@@ -2989,26 +2981,28 @@
     .footer-tagline {
       margin-top: 0.85rem;
       max-width: 22rem;
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.85);
-      line-height: 1.55;
+      font-size: 0.9375rem;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.6;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
     .footer-col-title {
-      font-size: 0.78rem;
+      font-size: 0.8125rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-weight: 600;
-      color: #ffffff;
-      opacity: 0.85;
+      color: rgba(255, 255, 255, 0.6);
       margin-bottom: 1.25rem;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
     .footer-links-list {
       display: flex;
       flex-direction: column;
       gap: 0.85rem;
-      font-size: 0.875rem;
+      font-size: 0.9375rem;
+      line-height: 1.65;
       color: rgba(255, 255, 255, 0.88);
     }
 
@@ -3016,6 +3010,7 @@
     .footer-links-list button {
       color: rgba(255, 255, 255, 0.88);
       text-align: left;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
       transition: color 0.2s ease, text-shadow 0.2s ease;
     }
 
@@ -3037,7 +3032,8 @@
       align-items: center;
       gap: 0.6rem;
       color: rgba(255, 255, 255, 0.88);
-      font-size: 0.875rem;
+      font-size: 0.9375rem;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
     }
 
     .footer-contact-item svg {
