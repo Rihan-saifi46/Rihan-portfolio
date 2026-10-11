@@ -760,23 +760,23 @@
     .footer-glass-card {
       position: relative;
       z-index: 10;
-      background: rgba(10, 12, 18, 0.32);
-      -webkit-backdrop-filter: blur(8px) saturate(140%);
-      backdrop-filter: blur(8px) saturate(140%);
-      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(10, 12, 18, 0.22);
+      -webkit-backdrop-filter: blur(4px) saturate(125%);
+      backdrop-filter: blur(4px) saturate(125%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 28px;
       padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
       box-shadow: 
-        0 24px 60px -15px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+        0 20px 50px -15px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.02);
       overflow: hidden;
       transition: border-color 0.4s ease, box-shadow 0.4s ease;
     }
 
-    @supports not (backdrop-filter: blur(8px)) {
+    @supports not (backdrop-filter: blur(4px)) {
       .footer-glass-card {
-        background: rgba(10, 12, 18, 0.75);
+        background: rgba(10, 12, 18, 0.7);
       }
     }
 

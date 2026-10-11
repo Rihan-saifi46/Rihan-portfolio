@@ -110,22 +110,22 @@
 
       // Lighting Setup
       // 1) Ambient Light: Ensures resting boxes have rich metallic slate presence
-      this.ambientLight = new THREE.AmbientLight(0x40495a, 2.2);
+      this.ambientLight = new THREE.AmbientLight(0x525c72, 2.5);
       this.scene.add(this.ambientLight);
 
       // 2) Directional Key Light: Angled from top-front-right for dimensional shading
-      this.dirLight = new THREE.DirectionalLight(0xffffff, 2.4);
-      this.dirLight.position.set(300, -500, 700);
+      this.dirLight = new THREE.DirectionalLight(0xffffff, 2.8);
+      this.dirLight.position.set(200, -400, 600);
       this.scene.add(this.dirLight);
 
       // 3) Cursor Dynamic Point Light: Warm Amber / Gold that tracks the pointer
-      this.cursorPointLight = new THREE.PointLight(0xe88d43, 0, 420);
-      this.cursorPointLight.position.set(0, 0, 50);
+      this.cursorPointLight = new THREE.PointLight(0xf59e0b, 0, 480);
+      this.cursorPointLight.position.set(0, 0, 60);
       this.scene.add(this.cursorPointLight);
 
       // 4) Cool Titanium Rim Light: Subtle opposing accent
-      this.rimLight = new THREE.PointLight(0x7dd3fc, 0.9, 650);
-      this.rimLight.position.set(-400, 300, 150);
+      this.rimLight = new THREE.PointLight(0x93c5fd, 1.2, 700);
+      this.rimLight.position.set(-350, 250, 200);
       this.scene.add(this.rimLight);
 
       // Raycaster & Ground Plane (Z = 0)
@@ -138,11 +138,11 @@
       this.dummy = new THREE.Object3D();
 
       // Palette Colors
-      this.colorBaseBox = new THREE.Color(0x1e2330); // Sleek metallic obsidian slate
-      this.colorBaseEdge = new THREE.Color(0x4b5568); // Luminous metallic edge line
-      this.colorAmber = new THREE.Color(0xc76f36);    // Lumora brand warm amber
-      this.colorGold = new THREE.Color(0xf5a623);     // Wave crest warm gold
-      this.colorWhiteGleam = new THREE.Color(0xfef08a);// Specular rim gleam
+      this.colorBaseBox = new THREE.Color(0x222836); // Sleek metallic obsidian slate
+      this.colorBaseEdge = new THREE.Color(0x606f88); // Crisp luminous metallic edge line
+      this.colorAmber = new THREE.Color(0xd97706);    // Lumora brand warm amber
+      this.colorGold = new THREE.Color(0xfbbf24);     // Wave crest radiant gold
+      this.colorWhiteGleam = new THREE.Color(0xfffbeb);// Specular rim gleam
       this.tempColor = new THREE.Color();
       this.tempEdgeColor = new THREE.Color();
     }
@@ -351,17 +351,20 @@
 
       // Materials
       const boxMat = new THREE.MeshStandardMaterial({
-        roughness: 0.38,
-        metalness: 0.65
+        roughness: 0.32,
+        metalness: 0.55
       });
 
       const edgeMat = new THREE.LineBasicMaterial({
         transparent: true,
-        opacity: 0.55
+        opacity: 0.72
       });
 
       this.boxMesh = new THREE.InstancedMesh(boxGeo, boxMat, totalCount);
       this.edgeMesh = new THREE.InstancedMesh(edgeGeo, edgeMat, totalCount);
+      this.edgeMesh.isMesh = false;
+      this.edgeMesh.isLine = true;
+      this.edgeMesh.isLineSegments = true;
 
       this.scene.add(this.boxMesh);
       this.scene.add(this.edgeMesh);
