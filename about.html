@@ -611,21 +611,149 @@
       align-items: center;
     }
 
-    /* Footer */
-    .about-site-footer {
-      border-top: 1px solid rgba(0, 0, 0, 0.06);
-      padding-block: 2.25rem;
-      margin-top: auto;
-      font-size: 0.875rem;
-      color: var(--subtle);
+    /* Footer (Shared with Work page) */
+    #site-footer {
+      background: #080808;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: clamp(4rem, 8vh, 6rem);
+      padding-bottom: 3rem;
+      position: relative;
+      z-index: 10;
+      color: #ffffff;
     }
 
-    .about-footer-inner {
+    .footer-cta-row {
       display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 3.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-cta-row {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .footer-cta-h2 {
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+
+    .pill-btn.variant-primary {
+      background: var(--accent);
+      color: #ffffff;
+      border: 1px solid var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-radius: var(--radius-pill);
+      padding: 0.5rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .pill-btn.variant-primary:hover {
+      background: #c76f36;
+      box-shadow: 0 0 25px rgba(177, 95, 44, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .footer-cols {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding-block: 3.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .footer-cols {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-cols {
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+      }
+    }
+
+    .footer-brand-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .footer-brand-title svg {
+      font-size: 1.25rem;
+      color: var(--accent);
+    }
+
+    .footer-tagline {
+      margin-top: 0.75rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.5;
+      max-width: 22rem;
+    }
+
+    .footer-col-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .footer-links-list a,
+    .footer-links-list button {
+      color: inherit;
+      text-align: left;
+      transition: color 0.2s;
+    }
+
+    .footer-links-list a:hover,
+    .footer-links-list button:hover {
+      color: #ffffff;
+    }
+
+    .footer-legal-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 2rem;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    @media (min-width: 640px) {
+      .footer-legal-bar {
+        flex-direction: row;
+      }
     }
 
     /* Reusable Cinematic Editorial White Strip Transition Overlay */
@@ -899,8 +1027,6 @@
           <li><button type="button" data-nav-dest="home">Home</button></li>
           <li><button type="button" data-nav-dest="work">Work</button></li>
           <li><button type="button" aria-current="page" data-nav-dest="about">About</button></li>
-          <li><button type="button" data-nav-dest="experience">Experience</button></li>
-          <li><button type="button" data-nav-dest="skills">Skills</button></li>
           <li><button type="button" class="open-modal-trigger">Contact</button></li>
         </ul>
       </nav>
@@ -1011,16 +1137,65 @@
     </div>
   </main>
 
-  <!-- Editorial Minimal Footer -->
-  <footer class="about-site-footer">
-    <div class="shell about-footer-inner">
-      <div class="footer-left">
-        <span>© <span id="current-year">2026</span> Rihan Saifi. All rights reserved.</span>
+  <!-- Footer (Shared component with Work page) -->
+  <footer id="site-footer">
+    <div class="shell">
+      <div class="footer-cta-row">
+        <h2 class="footer-cta-h2">
+          <span>Have a project in mind?</span><br />
+          <span>Let's build it together.</span>
+        </h2>
+        <a href="mailto:saifirihan683@gmail.com" class="pill-btn variant-primary">
+          <span>Start a project</span>
+          <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17 17 7M8 7h9v9" />
+          </svg>
+        </a>
       </div>
-      <div class="footer-right">
-        <button type="button" class="animated-link" data-nav-dest="home">
-          <span>Back to Home ↑</span>
-        </button>
+
+      <div class="footer-cols">
+        <div>
+          <div class="footer-brand-title">
+            <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor">
+              <path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22Z" />
+            </svg>
+            <span>Rihan Saifi</span>
+          </div>
+          <p class="footer-tagline">Full Stack Developer based in New Delhi, India. Building modern web experiences,
+            e-commerce storefronts, and digital solutions.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links-list">
+            <li><button type="button" data-nav-dest="home">Home</button></li>
+            <li><button type="button" data-nav-dest="work">Work</button></li>
+            <li><button type="button" data-nav-dest="about"
+                style="color: #ffffff; text-decoration: underline;">About</button></li>
+            <li><button type="button" class="open-modal-trigger">Contact</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <ul class="footer-links-list">
+            <li><a href="mailto:saifirihan683@gmail.com">saifirihan683@gmail.com</a></li>
+            <li><a href="tel:9891735234">9891735234</a></li>
+            <li><span>New Delhi, India</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Profiles</h4>
+          <ul class="footer-links-list">
+            <li><a href="https://github.com/Rihan-saifi46" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-legal-bar">
+        <span>© 2026 Rihan Saifi. All rights reserved.</span>
+        <button type="button" data-nav-dest="home" style="color: inherit;">Back to Home ↑</button>
       </div>
     </div>
   </footer>
@@ -1067,20 +1242,8 @@
           </button>
         </li>
         <li>
-          <button type="button" class="nav-menu-btn" data-nav-dest="experience" style="--i:3">
+          <button type="button" class="nav-menu-btn" data-nav-target="contact" style="--i:3">
             <span class="nav-item-num">04</span>
-            <span class="nav-item-label">Experience</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="nav-menu-btn" data-nav-dest="skills" style="--i:4">
-            <span class="nav-item-num">05</span>
-            <span class="nav-item-label">Skills</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="nav-menu-btn" data-nav-target="contact" style="--i:5">
-            <span class="nav-item-num">06</span>
             <span class="nav-item-label">Contact</span>
           </button>
         </li>
@@ -1162,6 +1325,7 @@
 
   <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <!-- Lenis CDN & Module Architecture -->
   <script type="importmap">
@@ -1176,13 +1340,28 @@
     import Lenis from 'lenis';
 
     /* Initialize Lenis smooth scroll */
-    const lenis = new Lenis({ smoothWheel: true });
-    function raf(t) {
-      lenis.raf(t);
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const lenis = new Lenis({
+      smoothWheel: !isReducedMotion,
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    window.lenis = lenis;
+
+    if (window.gsap && window.ScrollTrigger) {
+      gsap.registerPlugin(ScrollTrigger);
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      function raf(t) {
+        lenis.raf(t);
+        requestAnimationFrame(raf);
+      }
       requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
-    window.lenis = lenis;
 
     function stopScroll() {
       if (window.lenis) window.lenis.stop();
@@ -1416,9 +1595,9 @@
 
       tl.to(stripBars, {
         xPercent: 0,
-        duration: 0.50,
-        stagger: 0.055,
-        ease: 'power3.inOut',
+        duration: 0.65,
+        stagger: 0.065,
+        ease: 'power2.inOut',
         onComplete: () => {
           // Stage 3: Midpoint - screen completely covered by white strips
           sessionStorage.setItem('strip_nav_active', '1');
@@ -1440,9 +1619,9 @@
 
       gsap.to(stripBars, {
         xPercent: -105,
-        duration: 0.50,
-        stagger: 0.055,
-        ease: 'power3.inOut',
+        duration: 0.65,
+        stagger: 0.065,
+        ease: 'power2.inOut',
         onComplete: () => {
           finishStripReveal();
         }

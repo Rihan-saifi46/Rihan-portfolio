@@ -3476,8 +3476,6 @@
           <li><button type="button" aria-current="page" data-nav-dest="home">Home</button></li>
           <li><button type="button" data-nav-dest="work">Work</button></li>
           <li><button type="button" data-nav-dest="about">About</button></li>
-          <li><button type="button" data-nav-dest="experience">Experience</button></li>
-          <li><button type="button" data-nav-dest="skills">Skills</button></li>
           <li><button type="button" class="open-modal-trigger">Contact</button></li>
         </ul>
       </nav>
@@ -3559,9 +3557,9 @@
                 </span>
               </span>
             </button>
-            <button type="button" class="pill-btn variant-outline no-arrow" data-scroll-to="works">
+            <button type="button" class="pill-btn variant-outline no-arrow" data-nav-dest="work" aria-label="View My Work">
               <span class="pill-btn-inner">
-                <span>View Work</span>
+                <span>View My Work</span>
               </span>
             </button>
           </div>
@@ -4578,20 +4576,8 @@
           </button>
         </li>
         <li>
-          <button type="button" class="nav-menu-btn" data-nav-dest="experience" style="--i:3">
+          <button type="button" class="nav-menu-btn" data-nav-target="contact" style="--i:3">
             <span class="nav-item-num">04</span>
-            <span class="nav-item-label">Experience</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="nav-menu-btn" data-nav-dest="skills" style="--i:4">
-            <span class="nav-item-num">05</span>
-            <span class="nav-item-label">Skills</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="nav-menu-btn" data-nav-target="contact" style="--i:5">
-            <span class="nav-item-num">06</span>
             <span class="nav-item-label">Contact</span>
           </button>
         </li>
@@ -4710,6 +4696,7 @@
   </script>
   <!-- GSAP CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <!-- Main ES Module Script -->
   <script type="module">
@@ -4734,15 +4721,34 @@
     window.addEventListener('resize', applyAdaptiveGrid);
 
     /* --- Lenis Smooth Scroll & Scroll Lock Model --- */
-    const lenis = new Lenis({ smoothWheel: true });
-    function raf(t) {
-      lenis.raf(t);
-      updateScrollCurtain();
-      updateHorizontalShowcase();
-      updateCareerTimeline();
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const lenis = new Lenis({
+      smoothWheel: !isReducedMotion,
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+    window.lenis = lenis;
+
+    if (window.gsap && window.ScrollTrigger) {
+      gsap.registerPlugin(ScrollTrigger);
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+        updateScrollCurtain();
+        updateHorizontalShowcase();
+        updateCareerTimeline();
+      });
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      function raf(t) {
+        lenis.raf(t);
+        updateScrollCurtain();
+        updateHorizontalShowcase();
+        updateCareerTimeline();
+        requestAnimationFrame(raf);
+      }
       requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
 
     /* --- About → Projects Scroll-Driven Curtain Transition (UNTOUCHED) --- */
     const curtainZone = document.getElementById('about-works-curtain');
@@ -5932,9 +5938,9 @@
 
       tl.to(stripBars, {
         xPercent: 0,
-        duration: 0.50,
-        stagger: 0.055,
-        ease: 'power3.inOut',
+        duration: 0.65,
+        stagger: 0.065,
+        ease: 'power2.inOut',
         onComplete: () => {
           // Stage 3: Midpoint - old page is completely covered by white strips
           if (isCrossPage) {
@@ -5971,9 +5977,9 @@
 
       gsap.to(stripBars, {
         xPercent: -105,
-        duration: 0.50,
-        stagger: 0.055,
-        ease: 'power3.inOut',
+        duration: 0.65,
+        stagger: 0.065,
+        ease: 'power2.inOut',
         onComplete: () => {
           finishStripReveal();
         }
