@@ -2677,19 +2677,9 @@
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-card) var(--radius-card) 0 0;
-      background: #08080c;
+      background: #000000;
       color: #ffffff;
-      min-height: 520px;
-    }
-
-    .footer-box-grid-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-      display: block;
+      min-height: 480px;
     }
 
     .footer-inner {
@@ -2705,31 +2695,18 @@
       }
     }
 
-    /* Glassmorphism Panel behind footer content */
-    /* Glassmorphism Panel behind footer content */
+    /* Minimal Dark Footer Card Container */
     .footer-glass-card {
       position: relative;
       z-index: 10;
       max-width: 62rem;
       margin-inline: auto;
-      background: rgba(12, 14, 20, 0.45);
-      -webkit-backdrop-filter: blur(8px) saturate(135%);
-      backdrop-filter: blur(8px) saturate(135%);
+      background: #0a0a0c;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 28px;
       padding: clamp(2rem, 4vw, 3.25rem) clamp(1.75rem, 3.5vw, 2.75rem);
-      box-shadow: 
-        0 25px 60px -15px rgba(0, 0, 0, 0.65),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
       overflow: hidden;
-      transition: border-color 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    @supports not (backdrop-filter: blur(8px)) {
-      .footer-glass-card {
-        background: rgba(12, 14, 20, 0.85);
-      }
     }
 
     @media (max-width: 768px) {
@@ -2965,167 +2942,7 @@
       white-space: nowrap;
     }
 
-    /* NavMenu Overlay */
-    #nav-menu {
-      position: fixed;
-      inset: 0;
-      z-index: 115;
-      display: none;
-      flex-direction: column;
-      background: var(--ink);
-      color: #ffffff;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
 
-    #nav-menu.is-open {
-      display: flex;
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .nav-menu-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-block: 1.25rem;
-    }
-
-    @media (min-width: 640px) {
-      .nav-menu-top {
-        padding-block: 1.5rem;
-      }
-    }
-
-    .nav-menu-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1.125rem;
-      font-weight: 600;
-    }
-
-    .nav-menu-brand svg {
-      font-size: 1.25rem;
-      color: var(--accent-from);
-    }
-
-    .nav-menu-close {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: var(--radius-control);
-      padding: 0.5rem 1rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: rgba(255, 255, 255, 0.7);
-      cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .nav-menu-close:hover {
-        border-color: rgba(255, 255, 255, 0.4);
-        color: #ffffff;
-      }
-    }
-
-    .nav-menu-body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .nav-menu-items {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .nav-menu-btn {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      padding-block: 0.5rem;
-      text-align: left;
-      font-size: 2.25rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      cursor: pointer;
-      transform: translateY(1rem);
-      opacity: 0;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @media (min-width: 640px) {
-      .nav-menu-btn {
-        font-size: 3.75rem;
-      }
-    }
-
-    #nav-menu.is-open .nav-menu-btn {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .nav-item-num {
-      font-size: 1rem;
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.3);
-      transition: color 0.3s;
-    }
-
-    .nav-item-label {
-      color: rgba(255, 255, 255, 0.7);
-      transition: color 0.3s;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .nav-menu-btn:hover .nav-item-num {
-        color: var(--accent-from);
-      }
-
-      .nav-menu-btn:hover .nav-item-label {
-        color: #ffffff;
-      }
-    }
-
-    .nav-menu-bottom {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-block: 1.5rem;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.025em;
-      color: rgba(255, 255, 255, 0.45);
-    }
-
-    @media (min-width: 640px) {
-      .nav-menu-bottom {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-    }
-
-    .nav-menu-cta {
-      color: rgba(255, 255, 255, 0.7);
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .nav-menu-cta:hover {
-        color: #ffffff;
-        text-decoration: underline;
-      }
-    }
 
     /* Request Modal */
     #request-modal {
@@ -3471,15 +3288,6 @@
           <span class="clock-sep">•</span>
           <span class="clock-date live-date-display">-- ----, ----</span>
         </div>
-        <button type="button" id="open-menu-btn" class="menu-btn" aria-label="Open navigation menu">
-          <span class="menu-btn-inner">
-            <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <span class="menu-text">Menu</span>
-          </span>
-        </button>
       </div>
     </div>
   </header>
@@ -3551,9 +3359,9 @@
 
         <!-- Right Column -->
         <div class="hero-right-col">
-          <!-- HeroCard Carousel -->
+          <!-- Hero Web Development Card -->
           <div id="hero-card-el" class="hero-card">
-            <div id="carousel-click-card" class="hero-card-row" role="button" aria-label="Next slide">
+            <div class="hero-card-row">
               <div class="hero-card-tile">
                 <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor">
                   <path
@@ -3561,42 +3369,8 @@
                 </svg>
               </div>
               <div class="hero-card-panel">
-                <div class="carousel-slot">
-                  <div class="carousel-item active" data-index="0">
-                    <span class="carousel-caption">Web Development</span>
-                    <h3 class="carousel-title">Building responsive and production-ready websites.</h3>
-                  </div>
-                  <div class="carousel-item enter-up" data-index="1">
-                    <span class="carousel-caption">Full Stack</span>
-                    <h3 class="carousel-title">Frontend, backend, databases and APIs together.</h3>
-                  </div>
-                  <div class="carousel-item enter-up" data-index="2">
-                    <span class="carousel-caption">Shopify &amp; CMS</span>
-                    <h3 class="carousel-title">E-commerce experiences built for real businesses.</h3>
-                  </div>
-                </div>
-                <div class="carousel-controls">
-                  <div class="carousel-dashes">
-                    <span class="carousel-dash active" data-dash="0"></span>
-                    <span class="carousel-dash inactive" data-dash="1"></span>
-                    <span class="carousel-dash inactive" data-dash="2"></span>
-                  </div>
-                  <div class="carousel-btns">
-                    <button type="button" id="carousel-prev-btn" class="carousel-btn btn-prev"
-                      aria-label="Previous item">
-                      <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14M13 6l6 6-6 6" />
-                      </svg>
-                    </button>
-                    <button type="button" id="carousel-next-btn" class="carousel-btn btn-next" aria-label="Next item">
-                      <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14M13 6l6 6-6 6" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
+                <span class="carousel-caption">Web Development</span>
+                <h3 class="carousel-title">Building responsive and production-ready websites.</h3>
               </div>
             </div>
           </div>
@@ -4414,9 +4188,6 @@
 
   <!-- 10) Footer -->
   <footer id="site-footer">
-    <!-- Interactive 3D Box Grid Background Canvas -->
-    <canvas id="footer-box-grid-canvas" class="footer-box-grid-canvas" aria-hidden="true"></canvas>
-
     <div class="shell footer-inner">
       <div class="footer-glass-card">
         <!-- CTA Row -->
@@ -4525,59 +4296,7 @@
     <div class="footer-watermark" aria-hidden="true">RIHAN SAIFI</div>
   </footer>
 
-  <!-- 11) NavMenu Overlay -->
-  <aside id="nav-menu" aria-label="Full-screen navigation">
-    <div class="shell nav-menu-top">
-      <div class="nav-menu-brand">
-        <svg class="svg-icon" viewBox="0 0 48 48" fill="currentColor">
-          <path
-            d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z" />
-        </svg>
-        <span>Rihan Saifi</span>
-      </div>
-      <button type="button" id="close-menu-btn" class="nav-menu-close" aria-label="Close navigation">
-        <svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 4l16 16M20 4 4 20" />
-        </svg>
-        <span>Close</span>
-      </button>
-    </div>
 
-    <div class="shell nav-menu-body">
-      <ul class="nav-menu-items">
-        <li>
-          <button type="button" class="nav-menu-btn" data-nav-dest="home" style="--i:0">
-            <span class="nav-item-num">01</span>
-            <span class="nav-item-label">Home</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="nav-menu-btn" data-nav-dest="work" style="--i:1">
-            <span class="nav-item-num">02</span>
-            <span class="nav-item-label">Work</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="nav-menu-btn" data-nav-dest="about" style="--i:2">
-            <span class="nav-item-num">03</span>
-            <span class="nav-item-label">About</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="nav-menu-btn" data-nav-target="contact" style="--i:3">
-            <span class="nav-item-num">04</span>
-            <span class="nav-item-label">Contact</span>
-          </button>
-        </li>
-      </ul>
-    </div>
-
-    <div class="shell nav-menu-bottom">
-      <span>New Delhi time — <span class="live-time-display">--:--</span></span>
-      <button type="button" id="nav-menu-cta-btn" class="nav-menu-cta">Let's Talk →</button>
-    </div>
-  </aside>
 
   <!-- 12) Request Modal -->
   <div id="request-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
@@ -5566,55 +5285,7 @@
     }
     startLiquidLoop();
 
-    /* --- HeroCard Carousel Logic --- */
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.carousel-item');
-    const dashes = document.querySelectorAll('.carousel-dash');
-    const totalSlides = slides.length;
-    let isTransitioning = false;
 
-    function setSlide(nextIdx, direction = 'next') {
-      if (isTransitioning || nextIdx === currentSlide) return;
-      isTransitioning = true;
-
-      const currentEl = slides[currentSlide];
-      const nextEl = slides[nextIdx];
-
-      slides.forEach(s => s.className = 'carousel-item');
-
-      if (direction === 'next') {
-        currentEl.className = 'carousel-item exit-up';
-        nextEl.className = 'carousel-item enter-up';
-      } else {
-        currentEl.className = 'carousel-item exit-down';
-        nextEl.className = 'carousel-item enter-down';
-      }
-
-      void nextEl.offsetWidth; // force reflow
-
-      nextEl.className = 'carousel-item active';
-
-      dashes.forEach((d, i) => {
-        d.className = i === nextIdx ? 'carousel-dash active' : 'carousel-dash inactive';
-      });
-
-      currentSlide = nextIdx;
-      setTimeout(() => {
-        isTransitioning = false;
-      }, 360);
-    }
-
-    document.getElementById('carousel-next-btn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      setSlide((currentSlide + 1) % totalSlides, 'next');
-    });
-    document.getElementById('carousel-prev-btn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      setSlide((currentSlide - 1 + totalSlides) % totalSlides, 'prev');
-    });
-    document.getElementById('carousel-click-card').addEventListener('click', () => {
-      setSlide((currentSlide + 1) % totalSlides, 'next');
-    });
 
     /* --- Live Clock (New Delhi, India / IST) --- */
     function updateClock() {
@@ -5722,43 +5393,6 @@
 
 
 
-    /* --- NavMenu Modal Overlay --- */
-    const navMenu = document.getElementById('nav-menu');
-    const openMenuBtn = document.getElementById('open-menu-btn');
-    const closeMenuBtn = document.getElementById('close-menu-btn');
-    const navMenuCtaBtn = document.getElementById('nav-menu-cta-btn');
-
-    function openNavMenu() {
-      navMenu.classList.add('is-open');
-      stopScroll();
-    }
-    function closeNavMenu() {
-      navMenu.classList.remove('is-open');
-      if (!requestModal.classList.contains('is-open')) {
-        startScroll();
-      }
-    }
-
-    openMenuBtn.addEventListener('click', openNavMenu);
-    closeMenuBtn.addEventListener('click', closeNavMenu);
-
-    document.querySelectorAll('[data-nav-target]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const target = btn.getAttribute('data-nav-target');
-        closeNavMenu();
-        if (target === 'contact') {
-          setTimeout(openRequestModal, 250);
-        } else {
-          scrollToSection(target);
-        }
-      });
-    });
-
-    navMenuCtaBtn.addEventListener('click', () => {
-      closeNavMenu();
-      setTimeout(openRequestModal, 250);
-    });
-
     /* --- Request Modal Overlay --- */
     const requestModal = document.getElementById('request-modal');
     const modalPanel = document.getElementById('modal-panel-el');
@@ -5777,9 +5411,7 @@
 
     function closeRequestModal() {
       requestModal.classList.remove('is-open');
-      if (!navMenu.classList.contains('is-open')) {
-        startScroll();
-      }
+      startScroll();
       setTimeout(resetModalForm, 300);
     }
 
@@ -5810,7 +5442,6 @@
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         if (requestModal.classList.contains('is-open')) closeRequestModal();
-        else if (navMenu.classList.contains('is-open')) closeNavMenu();
       }
     });
 
